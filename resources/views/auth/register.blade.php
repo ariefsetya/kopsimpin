@@ -6,7 +6,7 @@
   <title>Koperasi Online | Sign Up</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?php echo url('bootstrap/css/bootstrap.min.css');?>">
-  <link rel="stylesheet" href="<?php echo url('plugins/Font-Awesome-master/css/font-awesome.min.css');?>">
+  <link rel="stylesheet" href="<?php echo url('plugins/fa/css/font-awesome.min.css');?>">
   <link rel="stylesheet" href="<?php echo url('dist/css/AdminLTE.min.css');?>">
   <link rel="stylesheet" href="<?php echo url('dist/css/skins/_all-skins.min.css');?>">
 
