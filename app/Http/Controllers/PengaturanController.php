@@ -10,6 +10,10 @@ use Auth;
 
 class PengaturanController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 	public function koperasi()
 	{
 		$data = \App\Koperasi::find(Auth::user()->assigned_koperasi);
@@ -43,6 +47,98 @@ class PengaturanController extends Controller {
 		$new->save();
 
 		return redirect(url('anggota'));
+	}
+
+	public function index()
+	{
+		$data = \App\User::paginate(20);
+		return view('pengaturan.allpengurus')->withData($data);
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('pengaturan.pengurusbaru');
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		$new = new \App\User;
+		$new->nama = Input::get('nama');
+		$new->email = Input::get('email');
+		$new->password = bcrypt(Input::get('password'));
+		$new->primary = Input::get('primary');
+		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->created_by = Auth::user()->id;
+		$new->save();
+
+		return redirect(url('pengaturan/pengurus'));
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$data = \App\User::find($id);
+		return view('pengaturan.pengurusedit')->withData($data);
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		$new = \App\User::find($id);
+		$new->nama = Input::get('nama');
+		$new->email = Input::get('email');
+		if(bcrypt(Input::get('password'))!=$new->password and trim(Input::get("password"))!=""){
+			$new->password = bcrypt(Input::get('password'));
+		}
+		$new->primary = Input::get('primary');
+		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->created_by = Auth::user()->id;
+		$new->save();
+
+		return redirect(url('pengaturan/pengurus'));
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		\App\User::find($id)->delete();
+		return redirect(url('pengaturan/pengurus'));
 	}
 
 }

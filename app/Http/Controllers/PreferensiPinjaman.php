@@ -20,7 +20,7 @@ class PreferensiPinjaman extends Controller {
 	}
 	public function index()
 	{
-		$data = \App\Pinjaman::paginate(20);
+		$data = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->paginate(20);
 		return view('preferensi.pinjaman.all')->withData($data);
 	}
 

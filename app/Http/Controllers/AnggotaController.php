@@ -20,7 +20,7 @@ class AnggotaController extends Controller {
 	}
 	public function index()
 	{
-		$data = \App\Anggota::paginate(20);
+		$data = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->paginate(20);
 		return view('anggota.all')->withData($data);
 	}
 

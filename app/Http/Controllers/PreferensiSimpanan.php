@@ -20,7 +20,7 @@ class PreferensiSimpanan extends Controller {
 	}
 	public function index()
 	{
-		$data = \App\Simpanan::paginate(20);
+		$data = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->paginate(20);
 		return view('preferensi.simpanan.all')->withData($data);
 	}
 

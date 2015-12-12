@@ -81,13 +81,13 @@ class KeuanganController extends Controller {
 			$id_anggota = session('id_anggota');
 
 
-		$data = \App\Keuangan::whereRaw('DATE_FORMAT(created_at,"%Y-%m-%d") between "'.($tgl[0]).'" and "'.($tgl[1]).'"')->where('id_anggota','like','%'.$id_anggota.'%')->paginate(50);
+		$data = \App\Keuangan::whereRaw('DATE_FORMAT(created_at,"%Y-%m-%d") between "'.($tgl[0]).'" and "'.($tgl[1]).'"')->where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_anggota','like','%'.$id_anggota.'%')->paginate(50);
 		//echo ($data[0]);
 		$last_id = 0;
 		if(sizeof($data)>0){
 			$last_id = $data[0]->id;
 		}
-		$saldo = \App\Keuangan::selectRaw('sum(masuk) as debit')->selectRaw('sum(keluar) as kredit')->whereRaw('id < '.$last_id)->where('id_anggota','like','%'.$id_anggota.'%')->first();
+		$saldo = \App\Keuangan::selectRaw('sum(masuk) as debit')->selectRaw('sum(keluar) as kredit')->whereRaw('id < '.$last_id)->where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_anggota','like','%'.$id_anggota.'%')->first();
 		return view('keuangan.rekap')->with(array('data'=>$data,'saldo'=>$saldo));
 	}
 	public function rekapexport()
@@ -98,7 +98,7 @@ class KeuanganController extends Controller {
 		$id_anggota = session('id_anggota');
 
 
-		$data = \App\Keuangan::selectRaw('created_at as "Waktu",no_nota as "No. Nota", jenis as "Jenis",info as "Keterangan",masuk as "Pemasukan",keluar as "Pengeluaran"')->whereRaw('DATE_FORMAT(created_at,"%Y-%m-%d") between "'.($tgl[0]).'" and "'.($tgl[1]).'"')->where('id_anggota','like','%'.$id_anggota.'%')->get();
+		$data = \App\Keuangan::selectRaw('created_at as "Waktu",no_nota as "No. Nota", jenis as "Jenis",info as "Keterangan",masuk as "Pemasukan",keluar as "Pengeluaran"')->whereRaw('DATE_FORMAT(created_at,"%Y-%m-%d") between "'.($tgl[0]).'" and "'.($tgl[1]).'"')->where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_anggota','like','%'.$id_anggota.'%')->get();
 		
 		Excel::create('Laporan Keuangan', function($excel) use($data) {
 

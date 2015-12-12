@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->string('password', 60);
 			$table->integer('assigned_koperasi');
-			$table->integer('enabled');
 			$table->integer('primary');
 			$table->integer('created_by');
 			$table->rememberToken();

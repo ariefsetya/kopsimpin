@@ -50,6 +50,8 @@ class Registrar implements RegistrarContract {
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 			'assigned_koperasi'=>$kop->id,
+			'primary'=>1,
+			'created_by'=>0,
 		]);
 
 		$kop->created_by = $user->id;

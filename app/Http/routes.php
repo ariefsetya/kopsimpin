@@ -57,6 +57,14 @@ Route::get('transaksi/pembayaran/selesai/{no_trx}', 'TransaksiPinjaman@selesaipe
 Route::get('transaksi/pembayaran/all', 'TransaksiPinjaman@datapembayaran');
 
 Route::get('pengaturan/koperasi', 'PengaturanController@koperasi');
+Route::post('pengaturan/koperasi', 'PengaturanController@save_koperasi');
+Route::get('pengaturan/pengurus', 'PengaturanController@index');
+Route::get('pengaturan/pengurus/baru', 'PengaturanController@create');
+Route::post('pengaturan/pengurus/baru', 'PengaturanController@store');
+Route::get('pengaturan/pengurus/edit/{id}', 'PengaturanController@edit');
+Route::post('pengaturan/pengurus/edit/{id}', 'PengaturanController@update');
+Route::get('pengaturan/pengurus/destroy/{id}', 'PengaturanController@destroy');
+
 
 Route::get('keuangan/pemasukan/koreksi','KeuanganController@koreksipemasukan');
 Route::post('keuangan/pemasukan/koreksi','KeuanganController@simpanpemasukan');

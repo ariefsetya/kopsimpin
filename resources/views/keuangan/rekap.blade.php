@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('header')
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="{{url('plugins/jQueryUI/jquery-ui.min.css')}}">
 @endsection
 
 @section('content')

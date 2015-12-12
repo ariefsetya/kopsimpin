@@ -48,6 +48,14 @@
                     <input type="text" value="{{$data->no_fax}}" required class="form-control" name="no_fax" placeholder="No. Fax">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Logo Koperasi</label>
+
+                  <div class="col-sm-10">
+                    <img src="{{url('images/'.$data->logo)}}" style="max-width:200px;">
+                    <input type="file" class="form-control" name="logo">
+                  </div>
+                </div>
 
               </div>
               <div class="box-header with-border">
