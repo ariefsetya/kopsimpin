@@ -31,7 +31,7 @@ class KeuanganController extends Controller {
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KP";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
-		$new->info = Input::get('keterangan');
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->masuk = Input::get('jumlah');
 		$new->save();
@@ -48,7 +48,7 @@ class KeuanganController extends Controller {
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KL";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
-		$new->info = Input::get('keterangan');
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->keluar = Input::get('jumlah');
 		$new->save();
