@@ -107,6 +107,7 @@
             <li><a href="{{url('laporan/saldo')}}"><i class="fa fa-tachometer"></i> Saldo Koperasi</a></li>
           </ul>
         </li>
+        @if(Auth::user()->primary==1)
         <li class="treeview">
           <a href="#">
             <i class="fa fa-cubes"></i>
@@ -118,6 +119,7 @@
             <li><a href="{{url('preferensi/pinjaman')}}"><i class="fa fa-money"></i> Pinjaman</a></li>
           </ul>
         </li>
+        @endif
         <li class="treeview">
           <a href="#">
             <i class="fa fa-cogs"></i>
@@ -125,8 +127,10 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
+            @if(Auth::user()->primary==1)
             <li><a href="{{url('pengaturan/koperasi')}}"><i class="fa fa-institution"></i> Koperasi</a></li>
             <li><a href="{{url('pengaturan/pengurus')}}"><i class="fa fa-group"></i> Pengurus</a></li>
+            @endif
             <li><a href="{{url('bantuan')}}"><i class="fa fa-life-ring"></i> Bantuan</a></li>
           </ul>
         </li>
