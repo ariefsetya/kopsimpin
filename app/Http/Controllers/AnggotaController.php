@@ -58,6 +58,7 @@ class AnggotaController extends Controller {
 		$new->kec = Input::get('kec');	
 		$new->kabkota = Input::get('kabkota');	
 		$new->prov = Input::get('prov');	
+		$new->kodepos = Input::get('kodepos');	
 		$new->negara = Input::get('negara');	
 		$new->created_by = Auth::user()->id;	
 		if(Input::hasFile('foto')){
@@ -128,6 +129,7 @@ class AnggotaController extends Controller {
 		$new->kec = Input::get('kec');	
 		$new->kabkota = Input::get('kabkota');	
 		$new->prov = Input::get('prov');	
+		$new->kodepos = Input::get('kodepos');	
 		$new->negara = Input::get('negara');	
 		$new->created_by = Auth::user()->id;	
 		if(Input::hasFile('foto')){

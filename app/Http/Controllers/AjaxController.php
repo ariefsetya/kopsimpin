@@ -14,7 +14,7 @@ class AjaxController extends Controller {
 		$data = \App\Anggota::where('nama','like','%'.$nama.'%')->where('id_koperasi',Auth::user()->assigned_koperasi)->get();
 		$kirim = array();
 		foreach ($data as $key) {
-			$kirim[] = array('id'=>$key['id'],'value'=>$key['nama'],'label'=>$key['nama']);
+			$kirim[] = array('id'=>$key['id'],'value'=>$key['nama'],'label'=>$key['no_anggota']." - ".$key['nama']);
 		}
 		echo json_encode($kirim);
 	}
@@ -43,6 +43,12 @@ class AjaxController extends Controller {
 					->limit(15)->get();
 		echo json_encode($data);
 	}
+	public function get_angsuran_all($id_induk)
+	{
+		$data = \App\Transaksi::where('jenis_transaksi','Pengembalian Pinjaman')
+					->where('id_induk',$id_induk)->get();
+		echo json_encode($data);
+	}
 	public function get_angsuran_data($id_transaksi)
 	{
 		$data = \App\Transaksi::find($id_transaksi);
@@ -60,8 +66,8 @@ class AjaxController extends Controller {
 					'jumlah_total'=>$data->jumlah_total,
 					'jatuh_tempo'=>date_format($data->created_at,"d M Y"),
 					'terlambat'=>$days,
-					'denda'=>number_format((($days<0)?$days*-1:0)*(0.5*$data_induk),2,".",""),
-					'total_pembayaran'=>number_format($data->jumlah_asli+$data->total_tabungan+((($days<0)?$days*-1:0)*(0.5*$data_induk)),2,".","")
+					'denda'=>number_format((($days<0)?$days*-1:0)*(0.05*$data_induk),2,".",""),
+					'total_pembayaran'=>number_format($data->jumlah_asli+$data->total_tabungan+((($days<0)?$days*-1:0)*(0.05*$data_induk)),2,".","")
 				);
 		echo json_encode($json);
 	}

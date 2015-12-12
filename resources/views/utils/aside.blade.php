@@ -83,13 +83,13 @@
                     <li><a href="{{url('keuangan/pengeluaran/koreksi')}}"><i class="fa fa-sign-out"></i> Pengeluaran Koperasi</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-user"></i> Anggota
+                <!--li><a><i class="fa fa-user"></i> Anggota
                 <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li><a href="{{url('keuangan/pemasukan/anggota')}}"><i class="fa fa-sign-in"></i> Pemasukan Anggota</a></li>
                     <li><a href="{{url('keuangan/pengeluaran/anggota')}}"><i class="fa fa-sign-out"></i> Pengeluaran Anggota</a></li>
                   </ul>
-                </li>
+                </li-->
               </ul>
             </li>
             <li><a href="{{url('keuangan/rekap')}}"><i class="fa fa-server"></i> Rekap Keuangan</a></li>
@@ -125,9 +125,9 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('settings/koperasi')}}"><i class="fa fa-institution"></i> Koperasi</a></li>
-            <li><a href="{{url('settings/pengurus')}}"><i class="fa fa-group"></i> Pengurus</a></li>
-            <li><a href="{{url('settings/bantuan')}}"><i class="fa fa-life-ring"></i> Bantuan</a></li>
+            <li><a href="{{url('pengaturan/koperasi')}}"><i class="fa fa-institution"></i> Koperasi</a></li>
+            <li><a href="{{url('pengaturan/pengurus')}}"><i class="fa fa-group"></i> Pengurus</a></li>
+            <li><a href="{{url('bantuan')}}"><i class="fa fa-life-ring"></i> Bantuan</a></li>
           </ul>
         </li>
       </ul>

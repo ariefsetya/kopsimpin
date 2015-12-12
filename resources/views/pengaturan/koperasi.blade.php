@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Edit Anggota
+        Edit
         <small>Koperasi</small>
       </h1>
     </section>
@@ -17,31 +17,14 @@
             <div class="box-body no-padding">
               <form class="form-horizontal" method="POST" enctype="multipart/form-data">
               <div class="box-header with-border">
-                <h3 class="box-title">Identitas Anggota</h3>
+                <h3 class="box-title">Identitas Koperasi</h3>
               </div>
               <div class="box-header with-border">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Nomor Anggota *)</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" required value="{{$data->no_anggota}}" name="no_anggota" class="form-control" placeholder="Nomor Anggota">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Nama *)</label>
+                  <label class="col-sm-2 control-label">Nama Koperasi *)</label>
 
                   <div class="col-sm-10">
                     <input type="text" required value="{{$data->nama}}" class="form-control" name="nama" placeholder="Nama">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Jenis Kelamin *)</label>
-
-                  <div class="col-sm-10">
-                    <select type="text" required class="form-control" name="gender">
-                    <option value="L" {{($data->gender=="L")?"selected":""}}>Laki-laki</option>
-                    <option value="P" {{($data->gender=="P")?"selected":""}}>Perempuan</option>
-                    </select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -59,38 +42,16 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">No. HP *)</label>
+                  <label class="col-sm-2 control-label">No. Fax</label>
 
                   <div class="col-sm-10">
-                    <input type="text" value="{{$data->no_hp}}" required class="form-control" name="no_hp" placeholder="No. HP">
+                    <input type="text" value="{{$data->no_fax}}" required class="form-control" name="no_fax" placeholder="No. Fax">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">No. KTP *)</label>
 
-                  <div class="col-sm-10">
-                    <input type="text" value="{{$data->no_ktp}}" required class="form-control" name="no_ktp" placeholder="No. KTP">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Scan KTP</label>
-
-                  <div class="col-sm-10">
-                    <img style="max-width:300px" src="{{url('images/'.$data->scan_ktp)}}">
-                    <input type="file" class="form-control" name="scan_ktp" placeholder="Scan KTP">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Foto</label>
-
-                  <div class="col-sm-10">
-                    <img style="max-width:150px" src="{{url('images/'.$data->foto)}}">
-                    <input type="file" class="form-control" name="foto" placeholder="Foto">
-                  </div>
-                </div>
               </div>
               <div class="box-header with-border">
-                <h3 class="box-title">Domisili Anggota</h3>
+                <h3 class="box-title">Domisili Koperasi</h3>
               </div>
               <div class="box-body">
                 <div class="form-group">

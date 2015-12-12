@@ -229,15 +229,19 @@ class TransaksiPinjaman extends Controller {
 	{
 		return view('transaksi.pembayaran');
 	}
+	public function datapembayaran()
+	{
+		return view('transaksi.datapembayaran');
+	}
 
 	public function simpanpembayaran()
 	{
-		$old = \App\Transaksi::orderBy('id','desc')->first()['id'];
 		$data = \App\Transaksi::where('id',Input::get('id_angsuran'))->first();
-		$data->no_transaksi = 'KSP-'.date("ymd").($old+1)."-PA";
+		$data->no_transaksi = 'KSP-'.date("ymd").($data->id_induk.$data->info_ke)."-PA";
 		$data->status = 'Lunas';
 		$data->denda = Input::get('jumlah_denda');
 		$data->total_denda = Input::get('total_denda');
+		$data->keterangan = Input::get('keterangan');
 		$data->save();
 
 		if(Input::get('jumlah_angsuran')>0){
@@ -291,6 +295,24 @@ class TransaksiPinjaman extends Controller {
 		}
 
 
-		return redirect(url('transaksi/pembayaran/baru'));
+		return redirect(url('transaksi/pembayaran/selesai/'.$data->no_transaksi));
+	}
+	public function printbukti($id_trx)
+	{
+		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
+		$data['transaksi'] = \App\Transaksi::where('no_transaksi',$id_trx)->first(); 
+		$data['anggota'] = \App\Anggota::find($data['transaksi']->id_anggota); 
+		$data['induk'] = \App\Transaksi::where('id',$data['transaksi']->id_induk)->first();
+		$data['keuangan'] = \App\Keuangan::where('id_transaksi',$data['transaksi']->id)->get();
+		return view('transaksi.printpembayaran')->with($data);
+	}	
+	public function selesaipembayaran($id_trx)
+	{
+		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
+		$data['transaksi'] = \App\Transaksi::where('no_transaksi',$id_trx)->first(); 
+		$data['anggota'] = \App\Anggota::find($data['transaksi']->id_anggota); 
+		$data['induk'] = \App\Transaksi::where('id',$data['transaksi']->id_induk)->first();
+		$data['keuangan'] = \App\Keuangan::where('id_transaksi',$data['transaksi']->id)->get();
+		return view('transaksi.selesaipembayaran')->with($data);
 	}
 }

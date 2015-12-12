@@ -31,6 +31,7 @@ class CreateAnggotasTable extends Migration {
 			$table->string('kec');
 			$table->string('kabkota');
 			$table->string('prov');
+			$table->string('kodepos');
 			$table->string('negara');
 			$table->integer('created_by');
 			$table->timestamps();

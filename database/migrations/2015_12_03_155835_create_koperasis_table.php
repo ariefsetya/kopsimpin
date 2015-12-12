@@ -16,12 +16,18 @@ class CreateKoperasisTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('nama');
+			$table->string('email');
+			$table->string('no_telp');
+			$table->string('no_fax');
+			$table->string('logo');
+			$table->string('catatan');
 			$table->string('alamat');
 			$table->string('rtrw');
 			$table->string('kel');
 			$table->string('kec');
 			$table->string('kabkota');
 			$table->string('prov');
+			$table->string('kodepos');
 			$table->string('negara');
 			$table->integer('created_by');
 			$table->timestamps();

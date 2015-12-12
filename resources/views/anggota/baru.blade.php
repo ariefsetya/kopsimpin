@@ -134,6 +134,13 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="col-sm-2 control-label">Kode Pos</label>
+
+                  <div class="col-sm-10">
+                    <input autocomplete="off" type="text" class="form-control" name="kodepos" placeholder="Kode Pos">
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-2 control-label">Negara</label>
 
                   <div class="col-sm-10">

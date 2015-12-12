@@ -1,7 +1,8 @@
 @extends('app')
 
+
 @section('header')
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="{{url('plugins/jQueryUI/jquery-ui.min.css')}}">
 @endsection
 
 @section('content')
@@ -54,38 +55,38 @@
                   <label class="col-sm-2 control-label">Tanggal Jatuh Tempo</label>
 
                   <div class="col-sm-10">
-                    <input type="text" value="0" readonly id="jatuh_tempo" required class="form-control" name="jatuh_tempo" placeholder="Jatuh Tempo">
+                    <input type="text" value="0" tabindex="-1" readonly id="jatuh_tempo" required class="form-control" name="jatuh_tempo" placeholder="Jatuh Tempo">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Jumlah Angsuran</label>
 
                   <div class="col-sm-10">
-                    <input type="text" value="0" readonly id="jumlah_angsuran" required class="form-control" name="jumlah_angsuran" placeholder="Jumlah">
+                    <input type="text" value="0" tabindex="-1" readonly id="jumlah_angsuran" required class="form-control" name="jumlah_angsuran" placeholder="Jumlah">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Jumlah Tabungan</label>
 
                   <div class="col-sm-10">
-                    <input type="text" value="0" readonly id="jumlah_tabungan" required class="form-control" name="jumlah_tabungan" placeholder="Jumlah">
+                    <input type="text" value="0" tabindex="-1" readonly id="jumlah_tabungan" required class="form-control" name="jumlah_tabungan" placeholder="Jumlah">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Denda</label>
 
                   <div class="col-sm-1">
-                    <input type="text" value="0" readonly id="jumlah_denda" required class="form-control" name="jumlah_denda" placeholder="Jumlah">
+                    <input type="text" value="0" tabindex="-1" readonly id="jumlah_denda" required class="form-control" name="jumlah_denda" placeholder="Jumlah">
                   </div>
                   <div class="col-sm-9">
-                    <input type="text" value="0" readonly id="total_denda" required class="form-control" name="total_denda" placeholder="Jumlah">
+                    <input type="text" value="0" tabindex="-1" readonly id="total_denda" required class="form-control" name="total_denda" placeholder="Jumlah">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Total Pembayaran</label>
 
                   <div class="col-sm-10">
-                    <input type="text" value="0" readonly id="total_pembayaran" required class="form-control" name="total_pembayaran" placeholder="Jumlah">
+                    <input type="text" value="0" tabindex="-1" readonly id="total_pembayaran" required class="form-control" name="total_pembayaran" placeholder="Jumlah">
                   </div>
                 </div>
                 <div class="form-group">
@@ -101,7 +102,7 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <a href="{{url('transaksi/pembayaran/all')}}" class="btn btn-default">Batal</a>
+                <a tabindex="-1" href="{{url('transaksi/pembayaran/all')}}" class="btn btn-default">Batal</a>
                 <button type="submit" class="btn btn-info pull-right">Simpan</button>
               </div>
               <!-- /.box-footer -->
