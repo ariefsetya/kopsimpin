@@ -6,8 +6,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tambah Preferensi
-        <small>Pinjaman</small>
+        Tambah Pengurus
+        <small>Koperasi</small>
       </h1>
     </section>
     <!-- Main content -->
@@ -17,35 +17,28 @@
             <div class="box-body no-padding">
               <form class="form-horizontal" method="POST" enctype="multipart/form-data">
               <div class="box-header with-border">
-                <h3 class="box-title">Preferensi Pinjaman</h3>
+                <h3 class="box-title">Pengurus Koperasi</h3>
               </div>
               <div class="box-header with-border">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Nama *)</label>
 
                   <div class="col-sm-10">
-                    <input type="text" required class="form-control" name="nama" placeholder="Nama">
+                    <input type="text" required class="form-control" name="name" placeholder="Nama">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Jangka Waktu</label>
+                  <label class="col-sm-2 control-label">E-Mail</label>
 
                   <div class="col-sm-10">
-                    <input type="text" value="12" required class="form-control" name="jangka_waktu" placeholder="Jangka Waktu">
+                    <input type="email" value="" required class="form-control" name="email" placeholder="E-Mail">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Bunga</label>
+                  <label class="col-sm-2 control-label">Password</label>
 
                   <div class="col-sm-10">
-                    <input type="text" required class="form-control" value="0" name="bunga" placeholder="Bunga">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Jumlah</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" value="0" required class="form-control" name="jumlah" placeholder="Jumlah Default">
+                    <input type="password" required class="form-control" value="0" name="password" placeholder="Password">
                   </div>
                 </div>
                     <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
@@ -53,7 +46,7 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <a href="{{url('preferensi/simpanan')}}" class="btn btn-default">Batal</a>
+                <a href="{{url('pengaturan/pengurus')}}" class="btn btn-default">Batal</a>
                 <button type="submit" class="btn btn-info pull-right">Simpan</button>
               </div>
               <!-- /.box-footer -->

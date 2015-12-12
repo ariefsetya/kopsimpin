@@ -73,11 +73,11 @@ class PengaturanController extends Controller {
 	public function store()
 	{
 		$new = new \App\User;
-		$new->nama = Input::get('nama');
+		$new->name = Input::get('name');
 		$new->email = Input::get('email');
 		$new->password = bcrypt(Input::get('password'));
-		$new->primary = Input::get('primary');
-		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->primary = 0;
+		$new->assigned_koperasi = Auth::user()->assigned_koperasi;
 		$new->created_by = Auth::user()->id;
 		$new->save();
 
@@ -116,13 +116,12 @@ class PengaturanController extends Controller {
 	public function update($id)
 	{
 		$new = \App\User::find($id);
-		$new->nama = Input::get('nama');
+		$new->name = Input::get('name');
 		$new->email = Input::get('email');
 		if(bcrypt(Input::get('password'))!=$new->password and trim(Input::get("password"))!=""){
 			$new->password = bcrypt(Input::get('password'));
 		}
-		$new->primary = Input::get('primary');
-		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->assigned_koperasi = Auth::user()->assigned_koperasi;
 		$new->created_by = Auth::user()->id;
 		$new->save();
 

@@ -44,7 +44,9 @@
 <script src="{{ url('dist/js/app.min.js') }}"></script>
 <script src="{{ url('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
-
+<script type="text/javascript">
+  $("input").attr('autocomplete','off');
+</script>
 @yield('footer')
 
 </body>
