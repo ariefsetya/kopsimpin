@@ -46,7 +46,7 @@ class PengaturanController extends Controller {
 		}
 		$new->save();
 
-		return redirect(url('anggota'));
+		return redirect(url('pengaturan/koperasi'));
 	}
 
 	public function index()
