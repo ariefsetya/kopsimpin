@@ -209,7 +209,7 @@
 
                 <p>
                   {{Auth::user()->name}}
-                  <small>Member since Nov. 2012</small>
+                  <small>Pengurus Koperasi</small>
                 </p>
               </li>
               <!--li class="user-body">
