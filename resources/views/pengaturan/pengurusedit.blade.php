@@ -46,7 +46,7 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <a href="{{url('preferensi/simpanan')}}" class="btn btn-default">Batal</a>
+                <a href="{{url('pengaturan/pengurus')}}" class="btn btn-default">Batal</a>
                 <button type="submit" class="btn btn-info pull-right">Simpan</button>
               </div>
               <!-- /.box-footer -->

@@ -9,7 +9,7 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <form action="#" method="get" class="sidebar-form">
+      <!--form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
@@ -17,7 +17,7 @@
                 </button>
               </span>
         </div>
-      </form>
+      </form-->
       <ul class="sidebar-menu">
         <li class="header">NAVIGATION</li>
         <li class="treeview">
@@ -57,7 +57,7 @@
                 <li><a href="{{url('transaksi/pinjaman')}}"><i class="fa fa-list"></i> Data Pinjaman</a></li>
               </ul>
             </li>
-            <li><a><i class="fa fa-money"></i> Angsuran
+            <li><a><i class="fa fa-pencil-square-o"></i> Angsuran
             <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="{{url('transaksi/pembayaran/baru')}}"><i class="fa fa-plus"></i> Pembayaran</a></li>
@@ -83,13 +83,13 @@
                     <li><a href="{{url('keuangan/pengeluaran/koreksi')}}"><i class="fa fa-sign-out"></i> Pengeluaran Koperasi</a></li>
                   </ul>
                 </li>
-                <!--li><a><i class="fa fa-user"></i> Anggota
+                <li><a><i class="fa fa-user"></i> Anggota
                 <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li><a href="{{url('keuangan/pemasukan/anggota')}}"><i class="fa fa-sign-in"></i> Pemasukan Anggota</a></li>
                     <li><a href="{{url('keuangan/pengeluaran/anggota')}}"><i class="fa fa-sign-out"></i> Pengeluaran Anggota</a></li>
                   </ul>
-                </li-->
+                </li>
               </ul>
             </li>
             <li><a href="{{url('keuangan/rekap')}}"><i class="fa fa-server"></i> Rekap Keuangan</a></li>

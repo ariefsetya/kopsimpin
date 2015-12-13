@@ -55,6 +55,42 @@ class KeuanganController extends Controller {
 
 		return redirect('keuangan/pengeluaran/koreksi')->withData($new->no_nota);
 	}
+	public function koreksipemasukananggota()
+	{
+		return view('keuangan.pemasukan.anggota');
+	}
+	public function simpanpemasukananggota()
+	{
+		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
+		$new = new \App\Keuangan;
+		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPA";
+		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->id_anggota = Input::get('id_anggota');
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->jenis = 'manual';
+		$new->masuk = Input::get('jumlah');
+		$new->save();
+
+		return redirect('keuangan/pemasukan/anggota')->withData($new->no_nota);
+	}	
+	public function koreksipengeluarananggota()
+	{
+		return view('keuangan.pengeluaran.anggota');
+	}
+	public function simpanpengeluarananggota()
+	{
+		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
+		$new = new \App\Keuangan;
+		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLA";
+		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->id_anggota = Input::get('id_anggota');
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->jenis = 'manual';
+		$new->keluar = Input::get('jumlah');
+		$new->save();
+
+		return redirect('keuangan/pengeluaran/anggota')->withData($new->no_nota);
+	}
 
 	public function rekap()
 	{
@@ -98,7 +134,22 @@ class KeuanganController extends Controller {
 		$id_anggota = session('id_anggota');
 
 
-		$data = \App\Keuangan::selectRaw('created_at as "Waktu",no_nota as "No. Nota", jenis as "Jenis",info as "Keterangan",masuk as "Pemasukan",keluar as "Pengeluaran"')->whereRaw('DATE_FORMAT(created_at,"%Y-%m-%d") between "'.($tgl[0]).'" and "'.($tgl[1]).'"')->where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_anggota','like','%'.$id_anggota.'%')->get();
+		$lama = \App\Keuangan::selectRaw('created_at as "Waktu",
+											no_nota as "No. Nota", 
+											jenis as "Jenis",
+											info as "Keterangan",
+											masuk as "Pemasukan",
+											keluar as "Pengeluaran"')->whereRaw('DATE_FORMAT(created_at,"%Y-%m-%d") between "'.($tgl[0]).'" and "'.($tgl[1]).'"')->where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_anggota','like','%'.$id_anggota.'%')->get();
+
+		$data = array();
+		foreach ($lama as $key) {
+			$data[] = array('Waktu'=>$key['Waktu'],
+							'No. Nota'=>$key['No. Nota'],
+							'Jenis'=>$key['Jenis'],
+							'Keterangan'=>$key['Keterangan'],
+							'Pemasukan'=>(int)$key['Pemasukan'],
+							'Pengeluaran'=>(int)$key['Pengeluaran']);
+		}
 		
 		Excel::create('Laporan Keuangan', function($excel) use($data) {
 

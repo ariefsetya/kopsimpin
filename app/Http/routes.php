@@ -70,6 +70,10 @@ Route::get('keuangan/pemasukan/koreksi','KeuanganController@koreksipemasukan');
 Route::post('keuangan/pemasukan/koreksi','KeuanganController@simpanpemasukan');
 Route::get('keuangan/pengeluaran/koreksi','KeuanganController@koreksipengeluaran');
 Route::post('keuangan/pengeluaran/koreksi','KeuanganController@simpanpengeluaran');
+Route::get('keuangan/pemasukan/anggota','KeuanganController@koreksipemasukananggota');
+Route::post('keuangan/pemasukan/anggota','KeuanganController@simpanpemasukananggota');
+Route::get('keuangan/pengeluaran/anggota','KeuanganController@koreksipengeluarananggota');
+Route::post('keuangan/pengeluaran/anggota','KeuanganController@simpanpengeluarananggota');
 Route::get('keuangan/rekap','KeuanganController@rekap');
 Route::get('keuangan/rekap/export','KeuanganController@rekapexport');
 Route::get('keuangan/rekap/clear',function ()
@@ -81,6 +85,14 @@ Route::get('keuangan/rekap/clear',function ()
 	return redirect(url('keuangan/rekap'));
 });
 Route::post('keuangan/rekap','KeuanganController@rekap');
+
+Route::get('laporan/simpanan','LaporanController@laporansimpanan');
+Route::get('laporan/pinjaman','LaporanController@laporanpinjaman');
+Route::get('laporan/pinjaman/export/{bulan}/{tahun}','LaporanController@laporanpinjamanexport');
+Route::get('laporan/simpanan/export/{bulan}/{tahun}','LaporanController@laporansimpananexport');
+Route::post('laporan/simpanan','LaporanController@laporansimpanan');
+Route::post('laporan/pinjaman','LaporanController@laporanpinjaman');
+Route::get('laporan/saldo','LaporanController@saldo');
 
 Route::get('ajax/get_anggota/{nama}', 'AjaxController@get_anggota');
 Route::get('ajax/get_simpanan/{id_jenis}', 'AjaxController@get_simpanan');

@@ -123,7 +123,6 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <a href="{{url('anggota')}}" class="btn btn-default">Batal</a>
                 <button type="submit" class="btn btn-info pull-right">Simpan</button>
               </div>
               <!-- /.box-footer -->

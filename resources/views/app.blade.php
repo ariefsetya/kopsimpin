@@ -46,6 +46,7 @@
 <script src="{{ url('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 <script type="text/javascript">
   $("input").attr('autocomplete','off');
+  $(".for_dttbls").dataTable();
 </script>
 @yield('footer')
 
