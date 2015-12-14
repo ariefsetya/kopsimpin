@@ -5,5 +5,5 @@
 .env.php
 .env
 /storage/framework/views/*
-/storage/images/*
+/storage/images/20*
 
