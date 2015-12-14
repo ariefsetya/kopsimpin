@@ -40,6 +40,11 @@ Route::get('preferensi/pinjaman/edit/{id}', 'PreferensiPinjaman@edit');
 Route::post('preferensi/pinjaman/edit/{id}', 'PreferensiPinjaman@update');
 Route::get('preferensi/pinjaman/destroy/{id}', 'PreferensiPinjaman@destroy');
 
+Route::get('preferensi/denda', 'PreferensiPinjaman@denda');
+Route::post('preferensi/denda', 'PreferensiPinjaman@simpandenda');
+Route::get('preferensi/catatan', 'PreferensiPinjaman@catatan');
+Route::post('preferensi/catatan', 'PreferensiPinjaman@simpancatatan');
+
 Route::get('transaksi/simpanan', 'TransaksiSimpanan@index');
 Route::get('transaksi/simpanan/baru', 'TransaksiSimpanan@create');
 Route::post('transaksi/simpanan/baru', 'TransaksiSimpanan@store');

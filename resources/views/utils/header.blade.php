@@ -200,12 +200,12 @@
           </li-->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="https://avatars2.githubusercontent.com/u/6067158?v=3&s=140" class="user-image" alt="User Image">
+              <img src="{{url('images/'.(\App\Koperasi::find(Auth::user()->assigned_koperasi)['logo']))}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{Auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <img src="https://avatars2.githubusercontent.com/u/6067158?v=3&s=140" class="img-circle" alt="User Image">
+                <img src="{{url('images/'.(\App\Koperasi::find(Auth::user()->assigned_koperasi)['logo']))}}" class="img-circle" alt="User Image">
 
                 <p>
                   {{Auth::user()->name}}

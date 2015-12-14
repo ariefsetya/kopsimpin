@@ -35,6 +35,9 @@ class Registrar implements RegistrarContract {
 		$kop->email = "emailanenih@gmail.com";
 		$kop->no_telp = "083870002220";
 		$kop->no_fax = "083870002220";
+		$kop->denda = "0.05";
+		$kop->logo = ("Logo-Koperasi.gif");
+		$kop->catatan = ("Simpan baik baik dan setiap kali berhubungan dengan BaseCamp Software");
 		$kop->rtrw = "04/04";
 		$kop->kel = "Balekambang";
 		$kop->kec = "Kramat Jati";
@@ -160,6 +163,8 @@ class Registrar implements RegistrarContract {
 		$ang->rtrw = "04/04";
 		$ang->kel = "Balekambang";
 		$ang->kec = "Kramat Jati";
+		$ang->scan_ktp = ("Logo-Koperasi.gif");
+		$ang->foto = ("Logo-Koperasi.gif");
 		$ang->kabkota = "Jakarta Timur";
 		$ang->prov = "DKI Jakarta";
 		$ang->kodepos = "13530";

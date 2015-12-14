@@ -2,7 +2,7 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="https://avatars2.githubusercontent.com/u/6067158?v=3&s=140" class="img-circle" alt="User Image">
+          <img src="{{url('images/'.(\App\Koperasi::find(Auth::user()->assigned_koperasi)['logo']))}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{Auth::user()->name}}</p>
@@ -117,6 +117,8 @@
           <ul class="treeview-menu">
             <li><a href="{{url('preferensi/simpanan')}}"><i class="fa fa-folder-open"></i> Simpanan</a></li>
             <li><a href="{{url('preferensi/pinjaman')}}"><i class="fa fa-money"></i> Pinjaman</a></li>
+            <li><a href="{{url('preferensi/denda')}}"><i class="fa fa-calendar-times-o"></i> Denda</a></li>
+            <li><a href="{{url('preferensi/catatan')}}"><i class="fa fa-pencil"></i> Catatan Transaksi</a></li>
           </ul>
         </li>
         @endif

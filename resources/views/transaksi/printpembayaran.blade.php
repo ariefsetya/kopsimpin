@@ -130,7 +130,7 @@
       <!-- accepted payments column -->
       <div class="col-xs-12">
         <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-        Catatan : Simpan baik baik dan setiap kali berhubungan dengan {{$koperasi->nama}} 
+        Catatan : {{(\App\Koperasi::find(Auth::user()->assigned_koperasi)['catatan'])}} 
         </p>
       </div>
       <!-- /.col -->

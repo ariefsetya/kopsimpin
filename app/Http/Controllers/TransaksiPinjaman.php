@@ -299,7 +299,7 @@ class TransaksiPinjaman extends Controller {
 	}
 	public function printbukti($id_trx)
 	{
-		$data['koperasi'] = \App\Koperasi::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Auth::user()->assigned_koperasi);
+		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
 		$data['transaksi'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('no_transaksi',$id_trx)->first(); 
 		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
 		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$data['transaksi']->id_induk)->first();
@@ -308,7 +308,7 @@ class TransaksiPinjaman extends Controller {
 	}	
 	public function selesaipembayaran($id_trx)
 	{
-		$data['koperasi'] = \App\Koperasi::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Auth::user()->assigned_koperasi);
+		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
 		$data['transaksi'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('no_transaksi',$id_trx)->first(); 
 		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
 		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$data['transaksi']->id_induk)->first();

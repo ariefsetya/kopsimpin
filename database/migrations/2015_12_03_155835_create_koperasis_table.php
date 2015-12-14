@@ -29,6 +29,8 @@ class CreateKoperasisTable extends Migration {
 			$table->string('prov');
 			$table->string('kodepos');
 			$table->string('negara');
+			$table->string('file_bantuan');
+			$table->decimal('denda',65);
 			$table->integer('created_by');
 			$table->timestamps();
 			$table->softDeletes();

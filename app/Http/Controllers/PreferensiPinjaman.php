@@ -59,9 +59,30 @@ class PreferensiPinjaman extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function denda()
 	{
-		//
+		return view('preferensi.denda');
+	}
+	public function simpandenda()
+	{
+		$denda = \App\Koperasi::find(Auth::user()->assigned_koperasi);
+		$denda->denda = Input::get('denda');
+		$denda->save();
+
+		return redirect(url('preferensi/denda'))->withPesan('tersimpan');
+	}
+
+	public function catatan()
+	{
+		return view('preferensi.catatan');
+	}
+	public function simpancatatan()
+	{
+		$catatan = \App\Koperasi::find(Auth::user()->assigned_koperasi);
+		$catatan->catatan = Input::get('catatan');
+		$catatan->save();
+
+		return redirect(url('preferensi/catatan'))->withPesan('tersimpan');
 	}
 
 	/**
