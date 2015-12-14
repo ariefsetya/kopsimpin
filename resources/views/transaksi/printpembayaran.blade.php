@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
-          <i class="fa fa-institution"></i> {{$koperasi->nama}} 
+          <img src="{{url('images/'.$koperasi->logo)}}" class="print_img"> {{$koperasi->nama}} 
           <small class="pull-right">{{date_format(date_create($transaksi->updated_at),"d")." ".(\App\Bulan::where('bulan',date_format(date_create($transaksi->updated_at),"m"))->first()['nama'])." ".date_format(date_create($transaksi->updated_at),"Y H:i:s") }}</small>
         </h2>
       </div>
@@ -50,7 +50,7 @@
           {{$koperasi->alamat}}<br>
           {{$koperasi->kabkota}}<br>
           Telp : {{$koperasi->no_telp}}<br>
-          Email: {{$koperasi->email}}
+          Email : {{$koperasi->email}}
         </address>
       </div>
       <!-- /.col -->
