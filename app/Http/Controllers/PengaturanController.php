@@ -51,7 +51,7 @@ class PengaturanController extends Controller {
 
 	public function index()
 	{
-		$data = \App\User::paginate(20);
+		$data = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->paginate(20);
 		return view('pengaturan.allpengurus')->withData($data);
 	}
 
@@ -103,7 +103,7 @@ class PengaturanController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$data = \App\User::find($id);
+		$data = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		return view('pengaturan.pengurusedit')->withData($data);
 	}
 
@@ -115,7 +115,7 @@ class PengaturanController extends Controller {
 	 */
 	public function update($id)
 	{
-		$new = \App\User::find($id);
+		$new = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->name = Input::get('name');
 		$new->email = Input::get('email');
 		if(bcrypt(Input::get('password'))!=$new->password and trim(Input::get("password"))!=""){
@@ -136,7 +136,7 @@ class PengaturanController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\User::find($id)->delete();
+		\App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
 		return redirect(url('pengaturan/pengurus'));
 	}
 

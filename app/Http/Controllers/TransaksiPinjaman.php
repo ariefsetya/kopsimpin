@@ -77,7 +77,7 @@ class TransaksiPinjaman extends Controller {
 		$finan->id_anggota = Input::get('id_anggota');
 		$finan->tabel = 'transaksis';
 		$finan->jenis = 'pinjaman';
-		$finan->info = "Pinjaman ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$finan->info = "Pinjaman ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$finan->id_transaksi = $new->id;
 		$finan->masuk = 0;
 		$finan->keluar = Input::get('jumlah');
@@ -91,7 +91,7 @@ class TransaksiPinjaman extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'biaya_admin';
-			$finan->info = "Biaya Admin Pinjaman ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('biaya_admin'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+			$finan->info = "Biaya Admin Pinjaman ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('biaya_admin'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $new->id;
 			$finan->masuk = Input::get('biaya_admin');
 			$finan->keluar = 0;
@@ -106,7 +106,7 @@ class TransaksiPinjaman extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'biaya_asuransi';
-			$finan->info = "Biaya Asuransi Pinjaman ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('biaya_asuransi'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+			$finan->info = "Biaya Asuransi Pinjaman ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('biaya_asuransi'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $new->id;
 			$finan->masuk = Input::get('biaya_asuransi');
 			$finan->keluar = 0;
@@ -121,7 +121,7 @@ class TransaksiPinjaman extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'biaya_materai';
-			$finan->info = "Biaya Materai Pinjaman ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('biaya_materai'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+			$finan->info = "Biaya Materai Pinjaman ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('biaya_materai'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $new->id;
 			$finan->masuk = Input::get('biaya_materai');
 			$finan->keluar = 0;
@@ -136,7 +136,7 @@ class TransaksiPinjaman extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'tabungan';
-			$finan->info = "Tabungan Pinjaman ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('tabungan'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+			$finan->info = "Tabungan Pinjaman ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('tabungan'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $new->id;
 			$finan->masuk = Input::get('tabungan');
 			$finan->keluar = 0;
@@ -190,7 +190,7 @@ class TransaksiPinjaman extends Controller {
 	 */
 	public function edit($id)
 	{
-		$data = \App\Pinjaman::find($id);
+		$data = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		return view('transaksi.pinjaman.edit')->withData($data);
 	}
 
@@ -202,7 +202,7 @@ class TransaksiPinjaman extends Controller {
 	 */
 	public function update($id)
 	{
-		$new = \App\Pinjaman::find($id);
+		$new = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->nama = Input::get('nama');
 		$new->jumlah = Input::get('jumlah');
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
@@ -219,9 +219,9 @@ class TransaksiPinjaman extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\Transaksi::find($id)->delete();
-		\App\Transaksi::where('id_induk',$id)->delete();
-		\App\Keuangan::where('tabel','transaksis')->where('id_transaksi',$id)->delete();
+		\App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
+		\App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_induk',$id)->delete();
+		\App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->where('tabel','transaksis')->where('id_transaksi',$id)->delete();
 		return redirect(url('transaksi/pinjaman'));
 	}
 
@@ -252,7 +252,7 @@ class TransaksiPinjaman extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'angsuran';
-			$finan->info = "Pembayaran Pinjaman ke-".$data->info_ke." ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('jumlah_angsuran'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+			$finan->info = "Pembayaran Pinjaman ke-".$data->info_ke." ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('jumlah_angsuran'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $data->id;
 			$finan->masuk = Input::get('jumlah_angsuran');
 			$finan->keluar = 0;
@@ -266,7 +266,7 @@ class TransaksiPinjaman extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'tabungan';
-			$finan->info = "Pembayaran Tabungan Pinjaman ke-".$data->info_ke." ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('jumlah_tabungan'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+			$finan->info = "Pembayaran Tabungan Pinjaman ke-".$data->info_ke." ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('jumlah_tabungan'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $data->id;
 			$finan->masuk = Input::get('jumlah_tabungan');
 			$finan->keluar = 0;
@@ -280,7 +280,7 @@ class TransaksiPinjaman extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'denda';
-			$finan->info = "Pembayaran Denda Pinjaman ke-".$data->info_ke." ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('total_denda'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+			$finan->info = "Pembayaran Denda Pinjaman ke-".$data->info_ke." ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('total_denda'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $data->id;
 			$finan->masuk = Input::get('total_denda');
 			$finan->keluar = 0;
@@ -299,20 +299,20 @@ class TransaksiPinjaman extends Controller {
 	}
 	public function printbukti($id_trx)
 	{
-		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
-		$data['transaksi'] = \App\Transaksi::where('no_transaksi',$id_trx)->first(); 
-		$data['anggota'] = \App\Anggota::find($data['transaksi']->id_anggota); 
-		$data['induk'] = \App\Transaksi::where('id',$data['transaksi']->id_induk)->first();
-		$data['keuangan'] = \App\Keuangan::where('id_transaksi',$data['transaksi']->id)->get();
+		$data['koperasi'] = \App\Koperasi::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Auth::user()->assigned_koperasi);
+		$data['transaksi'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('no_transaksi',$id_trx)->first(); 
+		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
+		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$data['transaksi']->id_induk)->first();
+		$data['keuangan'] = \App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_transaksi',$data['transaksi']->id)->get();
 		return view('transaksi.printpembayaran')->with($data);
 	}	
 	public function selesaipembayaran($id_trx)
 	{
-		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
-		$data['transaksi'] = \App\Transaksi::where('no_transaksi',$id_trx)->first(); 
-		$data['anggota'] = \App\Anggota::find($data['transaksi']->id_anggota); 
-		$data['induk'] = \App\Transaksi::where('id',$data['transaksi']->id_induk)->first();
-		$data['keuangan'] = \App\Keuangan::where('id_transaksi',$data['transaksi']->id)->get();
+		$data['koperasi'] = \App\Koperasi::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Auth::user()->assigned_koperasi);
+		$data['transaksi'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('no_transaksi',$id_trx)->first(); 
+		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
+		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$data['transaksi']->id_induk)->first();
+		$data['keuangan'] = \App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_transaksi',$data['transaksi']->id)->get();
 		return view('transaksi.selesaipembayaran')->with($data);
 	}
 }

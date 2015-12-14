@@ -72,7 +72,7 @@ class PreferensiPinjaman extends Controller {
 	 */
 	public function edit($id)
 	{
-		$data = \App\Pinjaman::find($id);
+		$data = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		return view('preferensi.pinjaman.edit')->withData($data);
 	}
 
@@ -84,7 +84,7 @@ class PreferensiPinjaman extends Controller {
 	 */
 	public function update($id)
 	{
-		$new = \App\Pinjaman::find($id);
+		$new = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->nama = Input::get('nama');
 		$new->jangka_waktu = Input::get('jangka_waktu');
 		$new->bunga = Input::get('bunga');
@@ -103,7 +103,7 @@ class PreferensiPinjaman extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\Pinjaman::find($id)->delete();
+		\App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
 		return redirect(url('preferensi/pinjaman'));
 	}
 

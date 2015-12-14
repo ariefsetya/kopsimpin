@@ -70,7 +70,7 @@ class PreferensiSimpanan extends Controller {
 	 */
 	public function edit($id)
 	{
-		$data = \App\Simpanan::find($id);
+		$data = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		return view('preferensi.simpanan.edit')->withData($data);
 	}
 
@@ -82,7 +82,7 @@ class PreferensiSimpanan extends Controller {
 	 */
 	public function update($id)
 	{
-		$new = \App\Simpanan::find($id);
+		$new = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->nama = Input::get('nama');
 		$new->jumlah = Input::get('jumlah');
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
@@ -99,7 +99,7 @@ class PreferensiSimpanan extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\Simpanan::find($id)->delete();
+		\App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
 		return redirect(url('preferensi/simpanan'));
 	}
 

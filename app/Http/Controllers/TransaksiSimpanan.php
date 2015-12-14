@@ -86,7 +86,7 @@ class TransaksiSimpanan extends Controller {
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
 			$finan->jenis = 'simpanan';
-			$finan->info = "Pembayaran ".(\App\Simpanan::find(Input::get('id_jenis'))['nama'])." ".(\App\Anggota::find(Input::get('id_anggota'))['nama'])." Rp. ".(Input::get('jumlah'))." ".date("d/m/Y H:i:s");
+			$finan->info = "Pembayaran ".(\App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_jenis'))['nama'])." ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(Input::get('jumlah'))." ".date("d/m/Y H:i:s");
 			$finan->id_transaksi = $new->id;
 			$finan->masuk = Input::get('jumlah');
 			$finan->keluar = 0;
@@ -117,7 +117,7 @@ class TransaksiSimpanan extends Controller {
 	 */
 	public function edit($id)
 	{
-		$data = \App\Simpanan::find($id);
+		$data = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		return view('transaksi.simpanan.edit')->withData($data);
 	}
 
@@ -129,7 +129,7 @@ class TransaksiSimpanan extends Controller {
 	 */
 	public function update($id)
 	{
-		$new = \App\Simpanan::find($id);
+		$new = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->nama = Input::get('nama');
 		$new->jumlah = Input::get('jumlah');
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
@@ -146,8 +146,8 @@ class TransaksiSimpanan extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\Transaksi::find($id)->delete();
-		\App\Keuangan::where('tabel','transaksis')->where('id_transaksi',$id)->delete();
+		\App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
+		\App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->where('tabel','transaksis')->where('id_transaksi',$id)->delete();
 		return redirect(url('transaksi/simpanan'));
 	}
 

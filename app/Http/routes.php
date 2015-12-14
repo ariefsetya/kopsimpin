@@ -112,7 +112,7 @@ Route::get('/images/{filename}', function ($filename)
 	return $response;
 });
 
-Route::get('bcrypt/{pass}',function ($pass)
-{
-	echo bcrypt($pass);
-});
+// Route::get('bcrypt/{pass}',function ($pass)
+// {
+// 	echo bcrypt($pass);
+// });

@@ -103,7 +103,7 @@ class AnggotaController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$data = \App\Anggota::find($id);
+		$data = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		return view('anggota.edit')->withData($data);
 	}
 
@@ -115,7 +115,7 @@ class AnggotaController extends Controller {
 	 */
 	public function update($id)
 	{
-		$new = \App\Anggota::find($id);	
+		$new = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);	
 		$new->nama = Input::get('nama');	
 		$new->id_koperasi = Auth::user()->assigned_koperasi;	
 		$new->email = Input::get('email');	
@@ -163,7 +163,7 @@ class AnggotaController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\Anggota::find($id)->delete();
+		\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
 		return redirect(url('anggota'));
 	}
 

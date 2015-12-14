@@ -67,8 +67,8 @@ class LaporanController extends Controller {
 							->get();
 		$export = array();
 		foreach ($data as $key) {
-			$export[] = array('Nama'=>\App\Anggota::find($key->id_anggota)['nama'],
-							'Jenis'=>\App\Pinjaman::find($key->id_jenis)['nama'],
+			$export[] = array('Nama'=>\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($key->id_anggota)['nama'],
+							'Jenis'=>\App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($key->id_jenis)['nama'],
 							'Angsuran'=>(int)$key->angsuran,
 							'Total'=>(int)$key->jumlah_total,
 							'Status'=>$key->status,
@@ -96,8 +96,8 @@ class LaporanController extends Controller {
 		$export = array();
 		foreach ($data as $key) {
 			$export[] = array('Tanggal'=>date_format(date_create($key->created_at),"d")." ".(\App\Bulan::where('bulan',date_format(date_create($key->created_at),"m"))->first()['nama'])." ".date_format(date_create($key->created_at),"Y"),
-							'Nama'=>\App\Anggota::find($key->id_anggota)['nama'],
-							'Jenis'=>\App\Simpanan::find($key->id_jenis)['nama'],
+							'Nama'=>\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($key->id_anggota)['nama'],
+							'Jenis'=>\App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($key->id_jenis)['nama'],
 							'Jumlah'=>(int)$key->jumlah_total);
 		}
 		

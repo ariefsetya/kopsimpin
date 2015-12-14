@@ -20,12 +20,12 @@ class AjaxController extends Controller {
 	}
 	public function get_simpanan($id)
 	{
-		$data = \App\Simpanan::find($id);
+		$data = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		echo $data->jumlah;
 	}
 	public function get_pinjaman($id)
 	{
-		$data = \App\Pinjaman::find($id);
+		$data = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		echo json_encode($data);
 	}
 	public function get_pinjaman_belum_lunas($id_anggota)
@@ -51,11 +51,11 @@ class AjaxController extends Controller {
 	}
 	public function get_angsuran_data($id_transaksi)
 	{
-		$data = \App\Transaksi::find($id_transaksi);
+		$data = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id_transaksi);
 
 		$days = (strtotime(date_format($data->created_at,"Y-m-d")) - strtotime(date("Y-m-d"))) / (60 * 60 * 24);
 
-		$data_induk = \App\Transaksi::find($data->id_induk)['jumlah_asli'];
+		$data_induk = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data->id_induk)['jumlah_asli'];
 
 		$json = array('bunga'=>$data->jumlah_bunga,
 					'admin'=>$data->biaya_admin,
