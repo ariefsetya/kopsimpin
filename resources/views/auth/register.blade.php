@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Koperasi Online | Sign Up</title>
+  <link href="{{url('favicon.png')}}" rel="shortcut icon">
+  <link href="{{url('favicon.png')}}" rel="favicon">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?php echo url('bootstrap/css/bootstrap.min.css');?>">
   <link rel="stylesheet" href="<?php echo url('plugins/fa/css/font-awesome.min.css');?>">
