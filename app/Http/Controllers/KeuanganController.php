@@ -66,7 +66,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPA";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Pemasukan Manual ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->masuk = Input::get('jumlah');
 		$new->save();
@@ -84,12 +84,48 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLA";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Pengeluaran Manual ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->keluar = Input::get('jumlah');
 		$new->save();
 
 		return redirect('keuangan/pengeluaran/anggota')->withData($new->no_nota);
+	}
+	public function koreksipemasukantabungan()
+	{
+		return view('keuangan.pemasukan.tabungan');
+	}
+	public function simpanpemasukantabungan()
+	{
+		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
+		$new = new \App\Keuangan;
+		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPT";
+		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->id_anggota = Input::get('id_anggota');
+		$new->info = "Pemasukan Tabungan ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->jenis = 'tabungan';
+		$new->masuk = Input::get('jumlah');
+		$new->save();
+
+		return redirect('keuangan/pemasukan/tabungan')->withData($new->no_nota);
+	}	
+	public function koreksipengeluarantabungan()
+	{
+		return view('keuangan.pengeluaran.tabungan');
+	}
+	public function simpanpengeluarantabungan()
+	{
+		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
+		$new = new \App\Keuangan;
+		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLT";
+		$new->id_koperasi = Auth::user()->assigned_koperasi;
+		$new->id_anggota = Input::get('id_anggota');
+		$new->info = "Pengeluaran Tabungan ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->jenis = 'tabungan';
+		$new->keluar = Input::get('jumlah');
+		$new->save();
+
+		return redirect('keuangan/pengeluaran/tabungan')->withData($new->no_nota);
 	}
 
 	public function rekap()

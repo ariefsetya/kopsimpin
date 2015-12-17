@@ -79,6 +79,10 @@ Route::get('keuangan/pemasukan/anggota','KeuanganController@koreksipemasukanangg
 Route::post('keuangan/pemasukan/anggota','KeuanganController@simpanpemasukananggota');
 Route::get('keuangan/pengeluaran/anggota','KeuanganController@koreksipengeluarananggota');
 Route::post('keuangan/pengeluaran/anggota','KeuanganController@simpanpengeluarananggota');
+Route::get('keuangan/pemasukan/tabungan','KeuanganController@koreksipemasukantabungan');
+Route::post('keuangan/pemasukan/tabungan','KeuanganController@simpanpemasukantabungan');
+Route::get('keuangan/pengeluaran/tabungan','KeuanganController@koreksipengeluarantabungan');
+Route::post('keuangan/pengeluaran/tabungan','KeuanganController@simpanpengeluarantabungan');
 Route::get('keuangan/rekap','KeuanganController@rekap');
 Route::get('keuangan/rekap/export','KeuanganController@rekapexport');
 Route::get('keuangan/rekap/clear',function ()

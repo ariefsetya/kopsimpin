@@ -14,7 +14,8 @@ class AjaxController extends Controller {
 		$data = \App\Anggota::where('nama','like','%'.$nama.'%')->where('id_koperasi',Auth::user()->assigned_koperasi)->get();
 		$kirim = array();
 		foreach ($data as $key) {
-			$kirim[] = array('id'=>$key['id'],'value'=>$key['nama'],'label'=>$key['no_anggota']." - ".$key['nama']);
+			$saldo = \App\Keuangan::selectRaw('(sum(masuk)-sum(keluar)) as tabungan')->where('id_koperasi',Auth::user()->assigned_koperasi)->where('jenis','tabungan')->where('id_anggota',$key->id)->first();
+			$kirim[] = array('id'=>$key['id'],'value'=>$key['nama'],'label'=>$key['no_anggota']." - ".$key['nama'],'saldo'=>$saldo->tabungan);
 		}
 		echo json_encode($kirim);
 	}
