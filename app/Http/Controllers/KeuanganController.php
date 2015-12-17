@@ -66,7 +66,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPA";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = "Pemasukan Manual ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->masuk = Input::get('jumlah');
 		$new->save();
@@ -84,7 +84,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLA";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = "Pengeluaran Manual ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->keluar = Input::get('jumlah');
 		$new->save();
@@ -102,7 +102,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPT";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = "Pemasukan Tabungan ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'tabungan';
 		$new->masuk = Input::get('jumlah');
 		$new->save();
@@ -120,7 +120,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLT";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = "Pengeluaran Tabungan ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'tabungan';
 		$new->keluar = Input::get('jumlah');
 		$new->save();
