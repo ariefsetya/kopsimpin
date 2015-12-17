@@ -29,7 +29,7 @@
             <div class="box-body no-padding">
               <form class="form-horizontal" method="POST" enctype="multipart/form-data">
               <div class="box-header with-border">
-                <h3 class="box-title">Koreksi Pemasukan Koperasi dari Tabungan</h3>
+                <h3 class="box-title">Koreksi Pemasukan Koperasi dari Tabungan Anggota</h3>
               </div>
               <div class="box-header with-border">
                 <div class="form-group">

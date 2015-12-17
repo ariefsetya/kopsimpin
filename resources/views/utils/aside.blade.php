@@ -93,8 +93,8 @@
                 <li><a><i class="fa fa-credit-card"></i> Tabungan
                 <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                    <li><a href="{{url('keuangan/pemasukan/tabungan')}}"><i class="fa fa-sign-in"></i> Pemasukan Anggota</a></li>
-                    <li><a href="{{url('keuangan/pengeluaran/tabungan')}}"><i class="fa fa-sign-out"></i> Pengeluaran Anggota</a></li>
+                    <li><a href="{{url('keuangan/pemasukan/tabungan')}}"><i class="fa fa-sign-in"></i> Pemasukan Tabungan</a></li>
+                    <li><a href="{{url('keuangan/pengeluaran/tabungan')}}"><i class="fa fa-sign-out"></i> Pengeluaran Tabungan</a></li>
                   </ul>
                 </li>
               </ul>
