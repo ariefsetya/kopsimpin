@@ -95,6 +95,8 @@ Route::get('keuangan/rekap/clear',function ()
 });
 Route::post('keuangan/rekap','KeuanganController@rekap');
 
+Route::get('bantuan','PengaturanController@bantuan');
+
 Route::get('laporan/simpanan','LaporanController@laporansimpanan');
 Route::get('laporan/pinjaman','LaporanController@laporanpinjaman');
 Route::get('laporan/pinjaman/export/{bulan}/{tahun}','LaporanController@laporanpinjamanexport');

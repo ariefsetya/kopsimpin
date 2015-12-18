@@ -63,6 +63,11 @@ class PengaturanController extends Controller {
 	public function create()
 	{
 		return view('pengaturan.pengurusbaru');
+	}	
+
+	public function bantuan()
+	{
+		return view('pengaturan.bantuan');
 	}
 
 	/**
