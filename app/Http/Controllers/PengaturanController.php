@@ -143,7 +143,7 @@ class PengaturanController extends Controller {
 	{
 		$v = Validator::make(Input::all(), [
 	        'nama' => 'required',
-	        'email' => 'required|email|unique:users',
+	        'email' => 'required|email',
 	        'password'=>'required',
 	    ]);
 

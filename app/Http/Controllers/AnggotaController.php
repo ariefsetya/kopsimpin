@@ -132,7 +132,7 @@ class AnggotaController extends Controller {
 
 	    $v = Validator::make(Input::all(), [
 	        'nama' => 'required|min:1',
-	        'no_anggota' => 'required|unique:anggotas',
+	        'no_anggota' => 'required',
 	        'no_hp'=>'required',
 	        'no_ktp'=>'required',
 	        'alamat'=>'required',
