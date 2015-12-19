@@ -1,22 +1,18 @@
 <?php
-
 return [
-
-	/*
-	|--------------------------------------------------------------------------
-	| Password Reminder Language Lines
-	|--------------------------------------------------------------------------
-	|
-	| The following language lines are the default lines which match reasons
-	| that are given by the password broker for a password update attempt
-	| has failed, such as for an invalid token or invalid new password.
-	|
-	*/
-
-	"password" => "Passwords must be at least six characters and match the confirmation.",
-	"user" => "We can't find a user with that e-mail address.",
-	"token" => "This password reset token is invalid.",
-	"sent" => "We have e-mailed your password reset link!",
-	"reset" => "Your password has been reset!",
-
+    /*
+    |---------------------------------------------------------------------------------------
+    | Baris Bahasa untuk Pengingat Kata Sandi
+    |---------------------------------------------------------------------------------------
+    |
+    | Baris bahasa berikut adalah baris standar yang cocok dengan alasan yang
+    | diberikan oleh pembongkar kata sandi yang telah gagal dalam upaya pembaruan
+    | kata sandi, misalnya token tidak valid atau kata sandi baru tidak valid.
+    |
+    */
+    'password' => 'Kata sandi harus minimal enam karakter dan cocok dengan konfirmasi.',
+    'reset'    => 'Kata sandi Anda sudah direset!',
+    'sent'     => 'Kami sudah mengirim email yang berisi tautan untuk mereset kata sandi Anda!',
+    'token'    => 'Kata sandi token pengaturan ulang tidak sah.',
+    'user'     => 'Kami tidak dapat menemukan pengguna dengan alamat surel tersebut.',
 ];
