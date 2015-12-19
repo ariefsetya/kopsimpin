@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
+use Validator;	
 
 class TransaksiSimpanan extends Controller {
 
@@ -43,6 +44,15 @@ class TransaksiSimpanan extends Controller {
 	 */
 	public function store()
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'tahun'=>'required|numeric|size:4',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$cek = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)
 				->where('id_jenis',Input::get('id_jenis'))
 				->where('bulan',Input::get('bulan'))

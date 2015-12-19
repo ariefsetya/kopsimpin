@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
 use Excel;
+use Validator;
 
 
 class KeuanganController extends Controller {
@@ -27,6 +28,14 @@ class KeuanganController extends Controller {
 	}
 	public function simpanpemasukan()
 	{
+		$v = Validator::make(Input::all(), [
+	        'jumlah' => 'required|numeric',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KP";
@@ -44,6 +53,14 @@ class KeuanganController extends Controller {
 	}
 	public function simpanpengeluaran()
 	{
+		$v = Validator::make(Input::all(), [
+	        'jumlah' => 'required|numeric',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KL";
@@ -61,6 +78,15 @@ class KeuanganController extends Controller {
 	}
 	public function simpanpemasukananggota()
 	{
+		$v = Validator::make(Input::all(), [
+	        'jumlah' => 'required|numeric',
+	        'nama' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPA";
@@ -79,6 +105,15 @@ class KeuanganController extends Controller {
 	}
 	public function simpanpengeluarananggota()
 	{
+		$v = Validator::make(Input::all(), [
+	        'jumlah' => 'required|numeric',
+	        'nama' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLA";
@@ -97,6 +132,16 @@ class KeuanganController extends Controller {
 	}
 	public function simpanpemasukantabungan()
 	{
+
+		$v = Validator::make(Input::all(), [
+	        'jumlah' => 'required|numeric',
+	        'nama' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPT";
@@ -115,6 +160,16 @@ class KeuanganController extends Controller {
 	}
 	public function simpanpengeluarantabungan()
 	{
+
+		$v = Validator::make(Input::all(), [
+	        'jumlah' => 'required|numeric',
+	        'nama' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLT";

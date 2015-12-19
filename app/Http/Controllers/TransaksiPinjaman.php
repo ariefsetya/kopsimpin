@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
+use Validator;	
 
 class TransaksiPinjaman extends Controller {
 
@@ -43,6 +44,16 @@ class TransaksiPinjaman extends Controller {
 	 */
 	public function store()
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'jumlah'=>'required|numeric',
+	        'jangka_waktu'=>'required|numeric',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Transaksi::orderBy('id','desc')->first()['id'];
 		$new = new \App\Transaksi;
 		$new->no_transaksi = 'KSP-'.date("ymd").($data+1)."-P";
@@ -236,6 +247,14 @@ class TransaksiPinjaman extends Controller {
 
 	public function simpanpembayaran()
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$data = \App\Transaksi::where('id',Input::get('id_angsuran'))->first();
 		$data->no_transaksi = 'KSP-'.date("ymd").($data->id_induk.$data->info_ke)."-PA";
 		$data->status = 'Lunas';

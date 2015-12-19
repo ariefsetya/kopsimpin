@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
+use Validator;
 
 class AnggotaController extends Controller {
 
@@ -41,6 +42,19 @@ class AnggotaController extends Controller {
 	 */
 	public function store()
 	{
+
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'no_anggota' => 'required|unique:anggotas',
+	        'no_hp'=>'required',
+	        'no_ktp'=>'required',
+	        'alamat'=>'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		//$data = \App\Anggota::orderBy('id','desc')->first()['id'];
 		$new = new \App\Anggota;
 		//$new->no_anggota = 'KSP-'.date("ymd").($data+1)."-A";	
@@ -115,6 +129,20 @@ class AnggotaController extends Controller {
 	 */
 	public function update($id)
 	{
+
+	    $v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'no_anggota' => 'required|unique:anggotas',
+	        'no_hp'=>'required',
+	        'no_ktp'=>'required',
+	        'alamat'=>'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
+
 		$new = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);	
 		$new->nama = Input::get('nama');	
 		$new->id_koperasi = Auth::user()->assigned_koperasi;	

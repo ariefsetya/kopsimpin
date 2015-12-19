@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
+use Validator;	
 
 class PreferensiPinjaman extends Controller {
 
@@ -41,6 +42,16 @@ class PreferensiPinjaman extends Controller {
 	 */
 	public function store()
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'jumlah'=>'required|numeric',
+	        'jangka_waktu'=>'required|numeric',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$new = new \App\Pinjaman;
 		$new->nama = Input::get('nama');
 		$new->jangka_waktu = Input::get('jangka_waktu');
@@ -78,6 +89,14 @@ class PreferensiPinjaman extends Controller {
 	}
 	public function simpancatatan()
 	{
+		$v = Validator::make(Input::all(), [
+	        'catatan' => 'required|min:1',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$catatan = \App\Koperasi::find(Auth::user()->assigned_koperasi);
 		$catatan->catatan = Input::get('catatan');
 		$catatan->save();
@@ -105,6 +124,16 @@ class PreferensiPinjaman extends Controller {
 	 */
 	public function update($id)
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'jumlah'=>'required|numeric',
+	        'jangka_waktu'=>'required|numeric',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$new = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->nama = Input::get('nama');
 		$new->jangka_waktu = Input::get('jangka_waktu');

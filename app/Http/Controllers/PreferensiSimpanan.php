@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
+use Validator;
 
 class PreferensiSimpanan extends Controller {
 
@@ -41,6 +42,15 @@ class PreferensiSimpanan extends Controller {
 	 */
 	public function store()
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'jumlah'=>'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$new = new \App\Simpanan;
 		$new->nama = Input::get('nama');
 		$new->jumlah = Input::get('jumlah');
@@ -82,6 +92,15 @@ class PreferensiSimpanan extends Controller {
 	 */
 	public function update($id)
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required|min:1',
+	        'jumlah'=>'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$new = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->nama = Input::get('nama');
 		$new->jumlah = Input::get('jumlah');

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 
+use Validator;	
+
 
 class PengaturanController extends Controller {
 
@@ -22,6 +24,15 @@ class PengaturanController extends Controller {
 
 	public function save_koperasi()
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required',
+	        'alamat' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$new = \App\Koperasi::find(Auth::user()->assigned_koperasi);	
 		$new->nama = Input::get('nama');		
 		$new->email = Input::get('email');		
@@ -77,6 +88,16 @@ class PengaturanController extends Controller {
 	 */
 	public function store()
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required',
+	        'email' => 'required|email|unique:users',
+	        'password'=>'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$new = new \App\User;
 		$new->name = Input::get('name');
 		$new->email = Input::get('email');
@@ -120,6 +141,16 @@ class PengaturanController extends Controller {
 	 */
 	public function update($id)
 	{
+		$v = Validator::make(Input::all(), [
+	        'nama' => 'required',
+	        'email' => 'required|email|unique:users',
+	        'password'=>'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
 		$new = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->name = Input::get('name');
 		$new->email = Input::get('email');
