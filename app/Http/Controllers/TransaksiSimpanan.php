@@ -46,6 +46,7 @@ class TransaksiSimpanan extends Controller {
 	{
 		$v = Validator::make(Input::all(), [
 	        'nama' => 'required|min:1',
+	        'jumlah' => 'required|min:1|numeric',
 	        'tahun'=>'required|numeric|size:4',
 	    ]);
 

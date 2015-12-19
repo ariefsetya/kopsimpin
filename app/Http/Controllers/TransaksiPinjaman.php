@@ -46,8 +46,8 @@ class TransaksiPinjaman extends Controller {
 	{
 		$v = Validator::make(Input::all(), [
 	        'nama' => 'required|min:1',
-	        'jumlah'=>'required|numeric',
-	        'jangka_waktu'=>'required|numeric',
+	        'jumlah'=>'required|numeric|min:1',
+	        'jangka_waktu'=>'required|numeric|min:1',
 	    ]);
 
 	    if ($v->fails())
