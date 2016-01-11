@@ -89,7 +89,7 @@ class PengaturanController extends Controller {
 	public function store()
 	{
 		$v = Validator::make(Input::all(), [
-	        'nama' => 'required',
+	        'name' => 'required',
 	        'email' => 'required|email|unique:users',
 	        'password'=>'required',
 	    ]);
@@ -142,7 +142,7 @@ class PengaturanController extends Controller {
 	public function update($id)
 	{
 		$v = Validator::make(Input::all(), [
-	        'nama' => 'required',
+	        'name' => 'required',
 	        'email' => 'required|email',
 	        'password'=>'required',
 	    ]);
