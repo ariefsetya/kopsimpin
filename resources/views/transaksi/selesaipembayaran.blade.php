@@ -25,7 +25,8 @@
           <strong>{{$anggota->nama}}</strong><br>
           {{$anggota->alamat}}<br>
           {{$anggota->kabkota}}<br>
-          Telp : {{$anggota->no_hp}}
+          Telp : {{$anggota->no_hp}}<br>
+          Perusahaan : {{$anggota->email}}
         </address>
       </div>
       <div class="col-sm-4 invoice-col">

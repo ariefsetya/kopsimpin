@@ -41,6 +41,13 @@
               </div>
               <div class="box-header with-border">
                 <div class="form-group">
+                  <label class="col-sm-2 control-label">Tanggal</label>
+
+                  <div class="col-sm-10">
+                    <input autocomplete="off" type="text" id="tanggal" required class="form-control" name="tanggal" placeholder="Tanggal" value="{{date('d/M/Y')}}">
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-2 control-label">Nama *)</label>
 
                   <div class="col-sm-10">
