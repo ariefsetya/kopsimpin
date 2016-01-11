@@ -231,7 +231,7 @@
         $("#biaya_admin").val(biaya_admin.toFixed(2));
         var biaya_asuransi = (parseFloat(jumlah)*(parseFloat(persen_biaya_asuransi)/100));
         $("#biaya_asuransi").val(biaya_asuransi.toFixed(2));
-        var tabungan = (parseFloat(jumlah)*(parseFloat(persen_tabungan)/100)*parseInt(jangka_waktu));
+        var tabungan = (parseFloat(jumlah)*(parseFloat(persen_tabungan)/100) /**parseInt(jangka_waktu)*/);
         $("#tabungan").val(tabungan.toFixed(2));
         var total_tabungan = parseFloat(tabungan);
         var tabungan_per_bulan = parseFloat(total_tabungan)/(parseInt(jangka_waktu));
