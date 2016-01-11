@@ -44,7 +44,7 @@
                   <label class="col-sm-2 control-label">Tanggal</label>
 
                   <div class="col-sm-10">
-                    <input autocomplete="off" type="text" id="tanggal" required class="form-control" name="tanggal" placeholder="Tanggal" value="{{date('d/m/Y H:i:s')}}">
+                    <input autocomplete="off" type="text" id="tanggal" required class="form-control" name="tanggal" placeholder="Tanggal" disabled value="{{date('d/m/Y H:i:s')}}">
                   </div>
                 </div>
                 <div class="form-group">
