@@ -58,7 +58,7 @@
                   <label class="col-sm-2 control-label">Perusahaan</label>
 
                   <div class="col-sm-10">
-                    <input autocomplete="off" type="email" class="form-control" name="email" placeholder="Perusahaan">
+                    <input autocomplete="off" type="text" class="form-control" name="email" placeholder="Perusahaan">
                   </div>
                 </div>
                 <div class="form-group">
