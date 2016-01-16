@@ -231,7 +231,7 @@
           persen_biaya_materai!="" && persen_biaya_asuransi!="" && persen_biaya_admin!=""){
         var bunga = (parseFloat(jumlah)*(parseFloat(persen_bunga)/100));
         $("#bunga").val(bunga.toFixed(2));
-        var bunga_per_bulan = parseFloat(bunga)/parseInt(jangka_waktu);
+        var bunga_per_bulan = parseFloat(bunga);
         $("#bunga_per_bulan").val(bunga_per_bulan.toFixed(2));
         var biaya_materai = $("#biaya_materai").val();
         var biaya_admin = (parseFloat(jumlah)*(parseFloat(persen_biaya_admin)/100));
@@ -240,6 +240,8 @@
         $("#biaya_asuransi").val(biaya_asuransi.toFixed(2));
         var tabungan = (parseFloat(jumlah)*(parseFloat(persen_tabungan)/100) /**parseInt(jangka_waktu)*/);
         $("#tabungan").val(tabungan.toFixed(2));
+
+
         var total_tabungan = parseFloat(tabungan);
         var tabungan_per_bulan = parseFloat(total_tabungan)/(parseInt(jangka_waktu));
         var total_pengembalian = parseFloat(jumlah)+parseFloat(bunga)+(parseFloat(total_tabungan));
@@ -249,7 +251,10 @@
         $("#jumlah_total").val(total_pengembalian.toFixed(2));
         var total_peminjaman = parseFloat(jumlah)-parseFloat(biaya_admin)-parseFloat(biaya_materai)-parseFloat(biaya_asuransi)-parseFloat(tabungan_per_bulan);
         $("#total_peminjaman").val(total_peminjaman.toFixed(2));
-        var angsuran_per_bulan = (parseFloat(jumlah)+parseFloat(bunga))/parseInt(jangka_waktu);
+        // = (parseFloat(jumlah)+parseFloat(bunga))/parseInt(jangka_waktu);
+        var angsuran_per_bulan = parseFloat(parseFloat(bunga)*parseInt(jangka_waktu));
+        angsuran_per_bulan = parseFloat(angsuran_per_bulan)+parseFloat(jumlah);
+        angsuran_per_bulan = parseFloat(angsuran_per_bulan)/parseFloat(jangka_waktu);
         $("#angsuran").val(angsuran_per_bulan.toFixed(2));
       }
 

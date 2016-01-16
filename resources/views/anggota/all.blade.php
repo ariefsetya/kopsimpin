@@ -27,6 +27,7 @@
                       <th>Nama</th>
                       <th>No. Telp</th>
                       <th>Alamat</th>
+                      <th>Perusahaan</th>
                       <th colspan="2">Tindakan</th>
                     </tr>
                   </thead>
@@ -37,6 +38,7 @@
                       <td>{{$key->nama}}</td>
                       <td>{{$key->no_telp}}</td>
                       <td>{{$key->alamat}}</td>
+                      <td>{{$key->email}}</td>
                       <td><a href="{{url('anggota/edit/'.$key->id)}}">Ubah</a></td>
                       <td><a onclick="return confirm('Apakah Anda yakin akan menghapus anggota dengan nama {{$key->nama}}')" href="{{url('anggota/destroy/'.$key->id)}}">Hapus</a></td>
                     </tr>
