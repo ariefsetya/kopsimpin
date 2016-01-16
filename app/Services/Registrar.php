@@ -60,7 +60,7 @@ class Registrar implements RegistrarContract {
 		$kop->created_by = $user->id;
 		$kop->save();		
 
-		if(sizeof(\App\Bulan::all())==0){
+		if(sizeof(\App\Menu::all())==0){
 		$menu = new \App\Menu;
 		$menu->id_induk = 0;
 		$menu->nama = "Dashboard";
