@@ -60,6 +60,63 @@ class Registrar implements RegistrarContract {
 		$kop->created_by = $user->id;
 		$kop->save();		
 
+		if(sizeof(\App\Bulan::all())==0){
+		$menu = new \App\Menu;
+		$menu->id_induk = 0;
+		$menu->nama = "Dashboard";
+		$menu->url = "/";
+		$menu->icon = "fa-dashboard";
+		$menu->save();
+		$menu = new \App\Menu;
+		$menu->id_induk = 0;
+		$menu->nama = "Anggota";
+		$menu->url = "";
+		$menu->icon = "fa-user";
+		$menu->save();
+			$id_last = $menu->id;
+			$menu = new \App\Menu;
+			$menu->id_induk = $id_last;
+			$menu->nama = "Tambah Anggota";
+			$menu->url = "anggota/baru";
+			$menu->icon = "fa-user-plus";
+			$menu->save();
+			$menu = new \App\Menu;
+			$menu->id_induk = $id_last;
+			$menu->nama = "Data Anggota";
+			$menu->url = "anggota";
+			$menu->icon = "fa-list";
+			$menu->save();
+		$menu = new \App\Menu;
+		$menu->id_induk = 0;
+		$menu->nama = "Transaksi";
+		$menu->url = "";
+		$menu->icon = "fa-map-signs";
+		$menu->save();
+			$id_last = $menu->id;
+			$menu = new \App\Menu;
+			$menu->id_induk = $id_last;
+			$menu->nama = "Simpanan";
+			$menu->url = "";
+			$menu->icon = "fa-folder-open";
+			$menu->save();
+				$id_last = $menu->id;	
+				$menu = new \App\Menu;
+				$menu->id_induk = $id_last;
+				$menu->nama = "Tambah Simpanan";
+				$menu->url = "transaksi/simpanan/baru";
+				$menu->icon = "fa-plus";
+				$menu->save();
+				$menu = new \App\Menu;
+				$menu->id_induk = $id_last;
+				$menu->nama = "Data Simpanan";
+				$menu->url = "transaksi/simpanan";
+				$menu->icon = "fa-list";
+				$menu->save();
+
+				//dst
+
+		}
+
 		if(sizeof(\App\Bulan::all())!=12){
 			$bul = new \App\Bulan;
 			$bul->bulan = 1;
