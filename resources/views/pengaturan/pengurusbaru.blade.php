@@ -71,3 +71,13 @@
   <!-- /.content-wrapper -->
 
 @endsection
+
+@section('footer')
+
+<link rel="stylesheet" href="<?php echo base_url('assets/jqwidgets/styles/jqx.base.css');?>" type="text/css" />
+<script type="text/javascript" src="<?php echo base_url('assets/jqwidgets/jqxcore.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jqwidgets/jqxdata.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jqwidgets/jqxtree.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jqwidgets/jqxcheckbox.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jqwidgets/jqxnumberinput.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jqwidgets/jqxbuttons.js');?>"></script>

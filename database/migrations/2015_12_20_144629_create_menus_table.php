@@ -17,8 +17,8 @@ class CreateMenusTable extends Migration {
 			$table->increments('id');
 			$table->integer('id_induk');
 			$table->string('icon');
-			$table->integer('nama');
-			$table->integer('url');
+			$table->string('nama');
+			$table->string('url');
 			$table->timestamps();
 		});
 	}
