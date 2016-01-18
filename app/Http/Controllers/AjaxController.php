@@ -72,5 +72,19 @@ class AjaxController extends Controller {
 				);
 		echo json_encode($json);
 	}
+	public function get_menu()
+	{
+		$rekap = array();
+		$data = \App\Menu::all();
+		foreach ($data as $key) {
+			$rekap[] = array('id'=>$key->id,
+							'parentid'=>$key->id_induk,
+							'text'=>$key->nama,
+							'value'=>$key->id);
+		}
+
+		echo json_encode($rekap);
+	}
+
 
 }

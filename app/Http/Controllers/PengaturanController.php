@@ -107,6 +107,39 @@ class PengaturanController extends Controller {
 		$new->created_by = Auth::user()->id;
 		$new->save();
 
+		$priv_data = explode(",", Input::get('id_menu'));
+		for($i=0;$i<sizeof($priv_data);$i++) {
+			echo $priv_data[$i];
+
+			if(is_numeric($priv_data[$i]) and $priv_data[$i]>0){
+
+				$induk = \App\Menu::find($priv_data[$i])['id_induk'];
+				$ada = \App\Privileges::where(array('id_koperasi'=>Auth::user()->assigned_koperasi,
+												'id_users'=>$new->id,
+												'id_menu'=>$priv_data[$i]))->first();
+				$adainduk = \App\Privileges::where(array('id_koperasi'=>Auth::user()->assigned_koperasi,
+												'id_users'=>$new->id,
+												'id_menu'=>$induk))->first();
+				if(empty($ada)){
+					$new_priv = new \App\Privileges;
+					$new_priv->id_koperasi = Auth::user()->assigned_koperasi;
+					$new_priv->id_users = $new->id;
+					$new_priv->id_menu = $priv_data[$i];
+					$new_priv->open = 1;
+					$new_priv->save();
+				}
+
+				if(empty($adainduk) and $induk > 0){
+					$new_priv = new \App\Privileges;
+					$new_priv->id_koperasi = Auth::user()->assigned_koperasi;
+					$new_priv->id_users = $new->id;
+					$new_priv->id_menu = $induk;
+					$new_priv->open = 1;
+					$new_priv->save();
+				}
+
+			}
+		}
 		return redirect(url('pengaturan/pengurus'));
 	}
 
@@ -151,6 +184,7 @@ class PengaturanController extends Controller {
 	    {
 	        return redirect()->back()->withErrors($v->errors());
 	    }
+		\App\Privileges::where('assigned_koperasi',Auth::user()->assigned_koperasi)->where('id_users',$id)->delete();
 		$new = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->name = Input::get('name');
 		$new->email = Input::get('email');
@@ -160,6 +194,40 @@ class PengaturanController extends Controller {
 		$new->assigned_koperasi = Auth::user()->assigned_koperasi;
 		$new->created_by = Auth::user()->id;
 		$new->save();
+
+		$priv_data = explode(",", Input::get('id_menu'));
+		for($i=0;$i<sizeof($priv_data);$i++) {
+			echo $priv_data[$i];
+
+			if(is_numeric($priv_data[$i]) and $priv_data[$i]>0){
+
+				$induk = \App\Menu::find($priv_data[$i])['id_induk'];
+				$ada = \App\Privileges::where(array('id_koperasi'=>Auth::user()->assigned_koperasi,
+												'id_users'=>$new->id,
+												'id_menu'=>$priv_data[$i]))->first();
+				$adainduk = \App\Privileges::where(array('id_koperasi'=>Auth::user()->assigned_koperasi,
+												'id_users'=>$new->id,
+												'id_menu'=>$induk))->first();
+				if(empty($ada)){
+					$new_priv = new \App\Privileges;
+					$new_priv->id_koperasi = Auth::user()->assigned_koperasi;
+					$new_priv->id_users = $new->id;
+					$new_priv->id_menu = $priv_data[$i];
+					$new_priv->open = 1;
+					$new_priv->save();
+				}
+
+				if(empty($adainduk) and $induk > 0){
+					$new_priv = new \App\Privileges;
+					$new_priv->id_koperasi = Auth::user()->assigned_koperasi;
+					$new_priv->id_users = $new->id;
+					$new_priv->id_menu = $induk;
+					$new_priv->open = 1;
+					$new_priv->save();
+				}
+
+			}
+		}
 
 		return redirect(url('pengaturan/pengurus'));
 	}
@@ -173,6 +241,7 @@ class PengaturanController extends Controller {
 	public function destroy($id)
 	{
 		\App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
+		\App\Privileges::where('assigned_koperasi',Auth::user()->assigned_koperasi)->where('id_users',$id)->delete();
 		return redirect(url('pengaturan/pengurus'));
 	}
 

@@ -26,11 +26,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>Anggota</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
+          <a href="#"><i class="fa fa-user"></i> Anggota <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
             <li><a href="{{url('anggota/baru')}}"><i class="fa fa-user-plus"></i> Tambah Anggota</a></li>
             <li><a href="{{url('anggota')}}"><i class="fa fa-list"></i> Data Anggota</a></li>

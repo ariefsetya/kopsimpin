@@ -112,7 +112,6 @@ class Registrar implements RegistrarContract {
 				$menu->url = "transaksi/simpanan";
 				$menu->icon = "fa-list";
 				$menu->save();
-			$id_last = $menu->id;
 			$menu = new \App\Menu;
 			$menu->id_induk = $id_last;
 			$menu->nama = "Pinjaman";
@@ -132,7 +131,6 @@ class Registrar implements RegistrarContract {
 				$menu->url = "transaksi/pinjaman";
 				$menu->icon = "fa-list"; 
 				$menu->save();
-			$id_last = $menu->id;
 			$menu = new \App\Menu;
 			$menu->id_induk = $id_last;
 			$menu->nama = "Angsuran";
@@ -185,7 +183,6 @@ class Registrar implements RegistrarContract {
 					$menu->url = "keuangan/pengeluaran/koreksi";
 					$menu->icon = "fa-sign-out";
 					$menu->save();
-				$id_last2 = $menu->id;
 				$menu = new \App\Menu;
 				$menu->id_induk = $id_last2;
 				$menu->nama = "Anggota";
@@ -205,7 +202,6 @@ class Registrar implements RegistrarContract {
 					$menu->url = "keuangan/pengeluaran/anggota";
 					$menu->icon = "fa-sign-out";
 					$menu->save();
-				$id_last2 = $menu->id;
 				$menu = new \App\Menu;
 				$menu->id_induk = $id_last2;
 				$menu->nama = "Tabungan";
@@ -225,7 +221,6 @@ class Registrar implements RegistrarContract {
 					$menu->url = "keuangan/pengeluaran/tabungan";
 					$menu->icon = "fa-sign-out";
 					$menu->save();
-			$id_last = $menu->id;
 			$menu = new \App\Menu;
 			$menu->id_induk = $id_last;
 			$menu->nama = "Rekap Keuangan";

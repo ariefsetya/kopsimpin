@@ -112,6 +112,7 @@ Route::get('ajax/get_pinjaman/belum_lunas/{id_anggota}', 'AjaxController@get_pin
 Route::get('ajax/get_angsuran/belum_lunas/{id_anggota}', 'AjaxController@get_angsuran_belum_lunas');
 Route::get('ajax/get_angsuran/all/{id_anggota}', 'AjaxController@get_angsuran_all');
 Route::get('ajax/get_angsuran/data/{id_transaksi}', 'AjaxController@get_angsuran_data');
+Route::get('ajax/get_menu', 'AjaxController@get_menu');
 
 Route::get('/images/{filename}', function ($filename)
 {
