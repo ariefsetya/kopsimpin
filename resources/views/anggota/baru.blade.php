@@ -34,7 +34,7 @@
                   <label class="col-sm-2 control-label">Nomor Anggota *)</label>
 
                   <div class="col-sm-10">
-                    <input autocomplete="off" type="text" required name="no_anggota" class="form-control" placeholder="Nomor Anggota">
+                    <input autocomplete="off" type="text" required name="no_anggota" disabled class="form-control" placeholder="Nomor Anggota">
                   </div>
                 </div>
                 <div class="form-group">

@@ -81,6 +81,18 @@ class PreferensiPinjaman extends Controller {
 		$denda->save();
 
 		return redirect(url('preferensi/denda'))->withPesan('tersimpan');
+	}	
+	public function badan_hukum()
+	{
+		return view('preferensi.badan_hukum');
+	}
+	public function simpanbadan_hukum()
+	{
+		$denda = \App\Koperasi::find(Auth::user()->assigned_koperasi);
+		$denda->badan_hukum = Input::get('badan_hukum');
+		$denda->save();
+
+		return redirect(url('preferensi/badan_hukum'))->withPesan('tersimpan');
 	}
 
 	public function catatan()

@@ -163,8 +163,14 @@ class PengaturanController extends Controller {
 	public function edit($id)
 	{
 		$data = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id);
-		$priv = \App\Privileges::where('id_users = ?', [$id]);
-		return view('pengaturan.pengurusedit')->withData(array('data'=>$data, 'priv'=>$priv));
+		$priv = \App\Privileges::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_users', $id)->get();
+		//print_r($priv);
+		$dab = [];
+		foreach ($priv as $key) {
+			$dab[] = $key->id_menu;
+		}
+		$priv = implode(",", $dab);
+		return view('pengaturan.pengurusedit')->with(array('data'=>$data, 'priv'=>$priv));
 	}
 
 	/**
@@ -178,14 +184,13 @@ class PengaturanController extends Controller {
 		$v = Validator::make(Input::all(), [
 	        'name' => 'required',
 	        'email' => 'required|email',
-	        'password'=>'required',
 	    ]);
 
 	    if ($v->fails())
 	    {
 	        return redirect()->back()->withErrors($v->errors());
 	    }
-		\App\Privileges::where('assigned_koperasi',Auth::user()->assigned_koperasi)->where('id_users',$id)->delete();
+		\App\Privileges::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_users',$id)->delete();
 		$new = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		$new->name = Input::get('name');
 		$new->email = Input::get('email');
@@ -241,8 +246,8 @@ class PengaturanController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\User::where('id_koperasi',Auth::user()->id_koperasi)->find($id)->delete();
-		\App\Privileges::where('assigned_koperasi',Auth::user()->assigned_koperasi)->where('id_users',$id)->delete();
+		\App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
+		\App\Privileges::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_users',$id)->delete();
 		return redirect(url('pengaturan/pengurus'));
 	}
 

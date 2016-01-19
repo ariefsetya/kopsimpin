@@ -44,6 +44,8 @@ Route::get('preferensi/denda', 'PreferensiPinjaman@denda');
 Route::post('preferensi/denda', 'PreferensiPinjaman@simpandenda');
 Route::get('preferensi/catatan', 'PreferensiPinjaman@catatan');
 Route::post('preferensi/catatan', 'PreferensiPinjaman@simpancatatan');
+Route::get('preferensi/badan_hukum', 'PreferensiPinjaman@badan_hukum');
+Route::post('preferensi/badan_hukum', 'PreferensiPinjaman@simpanbadan_hukum');
 
 Route::get('transaksi/simpanan', 'TransaksiSimpanan@index');
 Route::get('transaksi/simpanan/baru', 'TransaksiSimpanan@create');

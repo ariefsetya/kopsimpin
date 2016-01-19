@@ -122,6 +122,7 @@
             <li><a href="{{url('preferensi/pinjaman')}}"><i class="fa fa-money"></i> Pinjaman</a></li>
             <li><a href="{{url('preferensi/denda')}}"><i class="fa fa-calendar-times-o"></i> Denda</a></li>
             <li><a href="{{url('preferensi/catatan')}}"><i class="fa fa-pencil"></i> Catatan Transaksi</a></li>
+            <li><a href="{{url('preferensi/badan_hukum')}}"><i class="fa fa-institution"></i> Badan Hukum</a></li>
           </ul>
         </li>
         @endif

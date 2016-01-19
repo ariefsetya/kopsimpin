@@ -40,7 +40,7 @@ class KeuanganController extends Controller {
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KP";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Koreksi Koperasi ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->masuk = Input::get('jumlah');
 		$new->save();
@@ -65,7 +65,7 @@ class KeuanganController extends Controller {
 		$new = new \App\Keuangan;
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KL";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Koreksi Koperasi ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->keluar = Input::get('jumlah');
 		$new->save();
@@ -80,7 +80,7 @@ class KeuanganController extends Controller {
 	{
 		$v = Validator::make(Input::all(), [
 	        'jumlah' => 'required|numeric',
-	        'nama' => 'required',
+	        'id_anggota' => 'required',
 	    ]);
 
 	    if ($v->fails())
@@ -92,7 +92,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPA";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Koreksi Anggota ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->masuk = Input::get('jumlah');
 		$new->save();
@@ -107,7 +107,7 @@ class KeuanganController extends Controller {
 	{
 		$v = Validator::make(Input::all(), [
 	        'jumlah' => 'required|numeric',
-	        'nama' => 'required',
+	        'id_anggota' => 'required',
 	    ]);
 
 	    if ($v->fails())
@@ -119,7 +119,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLA";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Koreksi Anggota ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'manual';
 		$new->keluar = Input::get('jumlah');
 		$new->save();
@@ -135,7 +135,7 @@ class KeuanganController extends Controller {
 
 		$v = Validator::make(Input::all(), [
 	        'jumlah' => 'required|numeric',
-	        'nama' => 'required',
+	        'id_anggota' => 'required',
 	    ]);
 
 	    if ($v->fails())
@@ -147,7 +147,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KPT";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Koreksi Tabungan ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'tabungan';
 		$new->masuk = Input::get('jumlah');
 		$new->save();
@@ -163,7 +163,7 @@ class KeuanganController extends Controller {
 
 		$v = Validator::make(Input::all(), [
 	        'jumlah' => 'required|numeric',
-	        'nama' => 'required',
+	        'id_anggota' => 'required',
 	    ]);
 
 	    if ($v->fails())
@@ -175,7 +175,7 @@ class KeuanganController extends Controller {
 		$new->no_nota = 'KSP-'.date("ymd").($data+1)."-KLT";
 		$new->id_koperasi = Auth::user()->assigned_koperasi;
 		$new->id_anggota = Input::get('id_anggota');
-		$new->info = Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
+		$new->info = "Koreksi Tabungan ".Input::get('keterangan')." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 		$new->jenis = 'tabungan';
 		$new->keluar = Input::get('jumlah');
 		$new->save();
@@ -227,6 +227,7 @@ class KeuanganController extends Controller {
 
 		$lama = \App\Keuangan::selectRaw('created_at as "Waktu",
 											no_nota as "No. Nota", 
+											id_anggota, 
 											jenis as "Jenis",
 											info as "Keterangan",
 											masuk as "Pemasukan",
@@ -237,6 +238,7 @@ class KeuanganController extends Controller {
 			$data[] = array('Waktu'=>$key['Waktu'],
 							'No. Nota'=>$key['No. Nota'],
 							'Jenis'=>$key['Jenis'],
+							'Anggota'=>\App\Anggota::find($key['id_anggota'])['nama'],
 							'Keterangan'=>$key['Keterangan'],
 							'Pemasukan'=>(int)$key['Pemasukan'],
 							'Pengeluaran'=>(int)$key['Pengeluaran']);

@@ -62,8 +62,8 @@ class TransaksiPinjaman extends Controller {
 		$new->id_anggota = Input::get('id_anggota');
 		$new->jenis_transaksi = 'Pinjaman';
 		$new->id_jenis = Input::get('id_jenis');
-		$new->bunga = Input::get('persen_bunga');
-		$new->jumlah_bunga = Input::get('bunga');
+		$new->bunga = Input::get('persen_bunga_keseluruhan');
+		$new->jumlah_bunga = Input::get('bunga_keseluruhan');
 		$new->admin = Input::get('persen_biaya_admin');
 		$new->biaya_admin = Input::get('biaya_admin');
 		$new->biaya_materai = Input::get('biaya_materai');
@@ -71,14 +71,14 @@ class TransaksiPinjaman extends Controller {
 		$new->biaya_asuransi = Input::get('biaya_asuransi');
 		$new->tabungan = Input::get('persen_tabungan');
 		$new->total_tabungan = Input::get('tabungan');
-		$new->tabungan_per_bulan = Input::get('tabungan_per_bulan');
+		$new->tabungan_per_bulan = Input::get('tabungan');
 		$new->jumlah_asli = Input::get('jumlah');
 		$new->jumlah_total = Input::get('jumlah_total');
 		$new->status = 'Belum Lunas';
 		$new->keterangan = Input::get('keterangan');
 		$new->total_peminjaman = Input::get('total_peminjaman');
 		$new->info_ke = Input::get('jangka_waktu');
-		$new->angsuran = Input::get('angsuran');
+		$new->angsuran = Input::get('angsuran_total');
 		$new->save();
 
 		$data = \App\Keuangan::orderBy('id','desc')->first()['id'];
@@ -165,9 +165,9 @@ class TransaksiPinjaman extends Controller {
 			$baru->bunga = Input::get('persen_bunga');
 			$baru->tabungan = Input::get('persen_tabungan');
 			$baru->jumlah_asli = Input::get('angsuran');
-			$baru->jumlah_bunga = Input::get('bunga_per_bulan');
-			$baru->total_tabungan = Input::get('tabungan_per_bulan');
-			$baru->jumlah_total = Input::get('total_per_bulan');
+			$baru->jumlah_bunga = Input::get('bunga');
+			$baru->total_tabungan = Input::get('tabungan');
+			$baru->jumlah_total = Input::get('angsuran_total');
 			$baru->status = 'Belum Lunas';
 			$baru->keterangan = '';
 			$baru->biaya_admin = 0;

@@ -82,7 +82,9 @@
                   </div>
                   <label class="col-sm-1 control-label pull-left">bulan</label>
                   <label class="col-sm-2 control-label"></label>
-                  <label class="col-sm-2 control-label">Bunga (%)</label>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Bunga per bulan (%)</label>
                 
                   <div class="col-sm-1">
                     <input autocomplete="off" type="text" value="0" onchange="cek_biaya()" id="persen_bunga" required class="form-control" name="persen_bunga" placeholder="Bunga">
@@ -90,7 +92,15 @@
                   <div class="col-sm-3">
                     <input autocomplete="off" type="text" value="0" onchange="cek_biaya()" tabindex="-1" readonly id="bunga" required class="form-control" name="bunga" placeholder="Bunga">
                   </div>
-                </div>
+                  <label class="col-sm-2 control-label">Bunga Total (%)</label>
+                
+                  <div class="col-sm-1">
+                    <input autocomplete="off" type="text" value="0" onchange="cek_biaya()" id="persen_bunga_keseluruhan" required class="form-control" name="persen_bunga_keseluruhan" placeholder="Bunga">
+                  </div>
+                  <div class="col-sm-3">
+                    <input autocomplete="off" type="text" value="0" onchange="cek_biaya()" tabindex="-1" readonly id="bunga_keseluruhan" required class="form-control" name="bunga_keseluruhan" placeholder="Bunga">
+                  </div>
+                </div>                
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Biaya Admin (%)</label>
 
@@ -139,10 +149,17 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Angsuran per bulan</label>
+                  <label class="col-sm-2 control-label">Angsuran bersih</label>
 
                   <div class="col-sm-10">
-                    <input autocomplete="off" type="text" value="0" tabindex="-1" onchange="cek_biaya()" id="angsuran" readonly required class="form-control" name="angsuran" placeholder="Angsuran per bulan">
+                    <input autocomplete="off" type="text" value="0" tabindex="-1" onchange="cek_biaya()" id="angsuran" readonly required class="form-control" name="angsuran" placeholder="Angsuran">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Angsuran total</label>
+
+                  <div class="col-sm-10">
+                    <input autocomplete="off" type="text" value="0" tabindex="-1" onchange="cek_biaya()" id="angsuran_total" readonly required class="form-control" name="angsuran_total" placeholder="Angsuran per bulan">
                   </div>
                 </div>
                 <div class="form-group">
@@ -157,6 +174,7 @@
                     <input autocomplete="off" type="hidden" class="form-control" name="bunga_per_bulan" id="bunga_per_bulan" value="0">
                     <input autocomplete="off" type="hidden" class="form-control" name="tabungan_per_bulan" id="tabungan_per_bulan" value="0">
                     <input autocomplete="off" type="hidden" class="form-control" name="total_per_bulan" id="total_per_bulan" value="0">
+                    <input autocomplete="off" type="hidden" class="form-control" name="temp_bunga" id="temp_bunga" value="0">
                 
               </div>
               <!-- /.box-body -->
@@ -221,41 +239,42 @@
     function cek_biaya () {
       var jumlah = $("#jumlah").val();
       var jangka_waktu = $("#jangka_waktu").val();
+      var biaya_materai = $("#biaya_materai").val();
       var persen_bunga = $("#persen_bunga").val();
       var persen_tabungan = $("#persen_tabungan").val();
       var persen_biaya_admin = $("#persen_biaya_admin").val();
       var persen_biaya_asuransi = $("#persen_biaya_asuransi").val();
       var persen_biaya_materai = $("#persen_biaya_materai").val();
+      var temp_bunga = $("#temp_bunga").val();
 
       if(jumlah!="" && jangka_waktu!="" && persen_bunga !="" && persen_tabungan!="" && 
           persen_biaya_materai!="" && persen_biaya_asuransi!="" && persen_biaya_admin!=""){
-        var bunga = (parseFloat(jumlah)*(parseFloat(persen_bunga)/100));
-        $("#bunga").val(bunga.toFixed(2));
-        var bunga_per_bulan = parseFloat(bunga);
-        $("#bunga_per_bulan").val(bunga_per_bulan.toFixed(2));
-        var biaya_materai = $("#biaya_materai").val();
-        var biaya_admin = (parseFloat(jumlah)*(parseFloat(persen_biaya_admin)/100));
-        $("#biaya_admin").val(biaya_admin.toFixed(2));
-        var biaya_asuransi = (parseFloat(jumlah)*(parseFloat(persen_biaya_asuransi)/100));
-        $("#biaya_asuransi").val(biaya_asuransi.toFixed(2));
-        var tabungan = (parseFloat(jumlah)*(parseFloat(persen_tabungan)/100) /**parseInt(jangka_waktu)*/);
-        $("#tabungan").val(tabungan.toFixed(2));
 
-
-        var total_tabungan = parseFloat(tabungan);
-        var tabungan_per_bulan = parseFloat(total_tabungan)/(parseInt(jangka_waktu));
-        var total_pengembalian = parseFloat(jumlah)+parseFloat(bunga)+(parseFloat(total_tabungan));
-        var total_per_bulan = parseFloat(total_pengembalian)/parseInt(jangka_waktu);
-        $("#total_per_bulan").val(total_per_bulan.toFixed(2));
-        $("#tabungan_per_bulan").val(tabungan_per_bulan.toFixed(2));
-        $("#jumlah_total").val(total_pengembalian.toFixed(2));
-        var total_peminjaman = parseFloat(jumlah)-parseFloat(biaya_admin)-parseFloat(biaya_materai)-parseFloat(biaya_asuransi)-parseFloat(tabungan_per_bulan);
-        $("#total_peminjaman").val(total_peminjaman.toFixed(2));
-        // = (parseFloat(jumlah)+parseFloat(bunga))/parseInt(jangka_waktu);
-        var angsuran_per_bulan = parseFloat(parseFloat(bunga)*parseInt(jangka_waktu));
-        angsuran_per_bulan = parseFloat(angsuran_per_bulan)+parseFloat(jumlah);
-        angsuran_per_bulan = parseFloat(angsuran_per_bulan)/parseFloat(jangka_waktu);
-        $("#angsuran").val(angsuran_per_bulan.toFixed(2));
+          var rp_bunga = parseFloat(jumlah)*parseFloat(persen_bunga);
+              rp_bunga = parseFloat(rp_bunga)/100;
+          $("#bunga").val(rp_bunga.toFixed(2));
+          var rp_bunga_all = parseFloat(rp_bunga)*parseFloat(jangka_waktu);
+          var bunga_all = parseFloat(persen_bunga)*parseFloat(jangka_waktu);
+          $("#persen_bunga_keseluruhan").val(bunga_all.toFixed(2));
+          $("#bunga_keseluruhan").val(rp_bunga_all.toFixed(2));
+          var biaya_admin = parseFloat(jumlah)*parseFloat(persen_biaya_admin);
+              biaya_admin = parseFloat(biaya_admin)/100;
+          $("#biaya_admin").val(biaya_admin.toFixed(2));
+          var biaya_asuransi = parseFloat(jumlah)*parseFloat(persen_biaya_asuransi);
+              biaya_asuransi = parseFloat(biaya_asuransi)/100;
+          $("#biaya_asuransi").val(biaya_asuransi.toFixed(2));
+          var tabungan = parseFloat(jumlah)*parseFloat(persen_tabungan);
+              tabungan = parseFloat(tabungan)/100;
+          var tabungan_all = parseFloat(tabungan)*parseFloat(jangka_waktu);
+          $("#tabungan").val(tabungan.toFixed(2));
+          var jumlah_total = parseFloat(jumlah)+parseFloat(rp_bunga_all);
+          $("#jumlah_total").val(jumlah_total.toFixed(2));
+          var total_peminjaman = parseFloat(jumlah)-parseFloat(biaya_admin)-parseFloat(biaya_materai)-parseFloat(biaya_asuransi)-parseFloat(tabungan);
+          $("#total_peminjaman").val(total_peminjaman.toFixed(2));
+          var angsuran = parseFloat(jumlah_total)/parseFloat(jangka_waktu);
+          var angsuran_total = parseFloat(angsuran)+parseFloat(tabungan);
+          $("#angsuran").val(angsuran.toFixed(2));
+          $("#angsuran_total").val(angsuran_total.toFixed(2));
       }
 
 

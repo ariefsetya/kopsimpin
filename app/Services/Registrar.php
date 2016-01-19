@@ -426,6 +426,16 @@ class Registrar implements RegistrarContract {
 		$ang->save();
 
 
+		$menu = \App\Menu::all();
+		foreach ($menu as $key) {
+			$priv = new \App\Privileges;
+			$priv->id_koperasi = $kop->id;
+			$priv->id_menu = $key['id'];
+			$priv->id_users = $user->id;
+			$priv->save();
+		}
+
+
 		return User::find($user->id);
 	}
 

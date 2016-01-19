@@ -67,8 +67,8 @@ class AjaxController extends Controller {
 					'jumlah_total'=>$data->jumlah_total,
 					'jatuh_tempo'=>date_format($data->created_at,"d M Y"),
 					'terlambat'=>$days,
-					'denda'=>number_format((($days<0)?$days*-1:0)*((\App\Koperasi::find(Auth::user()->assigned_koperasi)['denda'])*$data_induk),2,".",""),
-					'total_pembayaran'=>number_format($data->jumlah_asli+$data->total_tabungan+((($days<0)?$days*-1:0)*((\App\Koperasi::find(Auth::user()->assigned_koperasi)['denda'])*$data_induk)),2,".","")
+					'denda'=>number_format((($days<-2)?$days*-1:0)*((\App\Koperasi::find(Auth::user()->assigned_koperasi)['denda'])*$data_induk),2,".",""),
+					'total_pembayaran'=>number_format($data->jumlah_asli+$data->total_tabungan+((($days<-2)?$days*-1:0)*((\App\Koperasi::find(Auth::user()->assigned_koperasi)['denda'])*$data_induk)),2,".","")
 				);
 		echo json_encode($json);
 	}

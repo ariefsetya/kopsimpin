@@ -55,7 +55,7 @@
                   </div>
                 </div>
                     <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
-                
+                    <input type="hidden" class="form-control" id="id_menu" name="id_menu" value="">
               </div>
 
               <div class="box-header with-border">
@@ -137,14 +137,12 @@
     });
   }
   get_menus();
-  </script>
 
-    <script type="text/javascript">
   setTimeout(function () {
-  var id_user = "<?php echo $flow['assign_user'];?>";
+  var id_user = "{{$priv}}";
   var split = id_user.split(",");
     for (data in split){
-      $("#user_assign_id").jqxTree('checkItem', $("#"+split[data])[0], true);
+      $("#select_menu").jqxTree('checkItem', $("#"+split[data])[0], true);
     }
   },2000);
   </script>

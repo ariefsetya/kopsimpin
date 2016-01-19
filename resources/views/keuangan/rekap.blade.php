@@ -61,16 +61,20 @@
                     <tr>
                       <th class="text-center">Tanggal</th>
                       <th class="text-center">Nota</th>
+                      <th class="text-center">Nama</th>
+                      <th class="text-center">Jenis</th>
                       <th class="text-center">Pemasukan</th>
                       <th class="text-center">Pengeluaran</th>
                       <th class="text-center">Saldo</th>
-                      <th class="text-center">Tindakan</th>
+                      <th class="text-center">Info</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="bg-blue">
                     <?php $sisa = $saldo->debit-$saldo->kredit;?>
                       <td>Sisa Saldo</td>
+                      <td></td>
+                      <td></td>
                       <td></td>
                       <td class="text-right">{{number_format($saldo->debit,2)}}</td>
                       <td class="text-right">{{number_format($saldo->kredit,2)}}</td>
@@ -81,13 +85,15 @@
                     <tr>
                       <td>{{date_format(date_create($key->created_at),"d/m/Y H:i:s")}}</td>
                       <td>{{$key->no_nota}}</td>
+                      <td>{{\App\Anggota::find($key->id_anggota)['nama']}}</td>
+                      <td>{{$key->jenis}}</td>
                       <td class="text-right">{{number_format($key->masuk,2)}}</td>
                       <td class="text-right">{{number_format($key->keluar,2)}}</td>
                       <td class="text-right">{{number_format($sisa+$key->masuk-$key->keluar,2)}}</td>
                       <td><a onclick="buka_rekap({{$key->id}})">Info</a></td>
                     </tr>
                     <tr class="bg-gray" style="display:none;" id="rekap_{{$key->id}}">
-                      <td colspan="6">{{"[".$key->jenis."] ".$key->info}}</td>
+                      <td colspan="8">{{"[".$key->jenis."] ".$key->info}}</td>
                     </tr>
                     <?php $sisa = $sisa+$key->masuk-$key->keluar;?>
                     @endforeach

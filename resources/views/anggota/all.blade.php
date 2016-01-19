@@ -25,7 +25,7 @@
                     <tr>
                       <th>No. Anggota</th>
                       <th>Nama</th>
-                      <th>No. Telp</th>
+                      <th>No. HP</th>
                       <th>Alamat</th>
                       <th>Perusahaan</th>
                       <th colspan="2">Tindakan</th>
@@ -36,7 +36,7 @@
                     <tr>
                       <td>{{$key->no_anggota}}</td>
                       <td>{{$key->nama}}</td>
-                      <td>{{$key->no_telp}}</td>
+                      <td>{{$key->no_hp}}</td>
                       <td>{{$key->alamat}}</td>
                       <td>{{$key->email}}</td>
                       <td><a href="{{url('anggota/edit/'.$key->id)}}">Ubah</a></td>

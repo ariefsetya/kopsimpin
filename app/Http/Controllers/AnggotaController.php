@@ -45,7 +45,6 @@ class AnggotaController extends Controller {
 
 		$v = Validator::make(Input::all(), [
 	        'nama' => 'required|min:1',
-	        'no_anggota' => 'required|unique:anggotas',
 	        'no_hp'=>'required',
 	        'no_ktp'=>'required',
 	        'alamat'=>'required',
@@ -55,10 +54,10 @@ class AnggotaController extends Controller {
 	    {
 	        return redirect()->back()->withErrors($v->errors());
 	    }
-		//$data = \App\Anggota::orderBy('id','desc')->first()['id'];
+		$data = \App\Anggota::orderBy('id','desc')->first()['id'];
 		$new = new \App\Anggota;
-		//$new->no_anggota = 'KSP-'.date("ymd").($data+1)."-A";	
-		$new->no_anggota = Input::get('no_anggota');
+		$new->no_anggota = 'KSP-'.date("ymd").($data+1)."-A";	
+		//$new->no_anggota = Input::get('no_anggota');
 		$new->nama = Input::get('nama');	
 		$new->id_koperasi = Auth::user()->assigned_koperasi;	
 		$new->email = Input::get('email');	
@@ -132,7 +131,6 @@ class AnggotaController extends Controller {
 
 	    $v = Validator::make(Input::all(), [
 	        'nama' => 'required|min:1',
-	        'no_anggota' => 'required',
 	        'no_hp'=>'required',
 	        'no_ktp'=>'required',
 	        'alamat'=>'required',

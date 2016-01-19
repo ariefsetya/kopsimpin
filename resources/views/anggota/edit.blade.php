@@ -33,7 +33,7 @@
                   <label class="col-sm-2 control-label">Nomor Anggota *)</label>
 
                   <div class="col-sm-10">
-                    <input type="text" required value="{{$data->no_anggota}}" name="no_anggota" class="form-control" placeholder="Nomor Anggota">
+                    <input type="text" required value="{{$data->no_anggota}}" disabled name="no_anggota" class="form-control" placeholder="Nomor Anggota">
                   </div>
                 </div>
                 <div class="form-group">

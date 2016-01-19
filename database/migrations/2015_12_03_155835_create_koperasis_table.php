@@ -30,6 +30,7 @@ class CreateKoperasisTable extends Migration {
 			$table->string('kodepos');
 			$table->string('negara');
 			$table->string('file_bantuan');
+			$table->string('badan_hukum');
 			$table->decimal('denda',65);
 			$table->integer('created_by');
 			$table->timestamps();
