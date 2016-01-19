@@ -163,7 +163,8 @@ class PengaturanController extends Controller {
 	public function edit($id)
 	{
 		$data = \App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id);
-		return view('pengaturan.pengurusedit')->withData($data);
+		$priv = \App\Privileges::where('id_users = ?', [$id]);
+		return view('pengaturan.pengurusedit')->withData(array('data'=>$data, 'priv'=>$priv));
 	}
 
 	/**
@@ -240,7 +241,7 @@ class PengaturanController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\User::where('assigned_koperasi',Auth::user()->assigned_koperasi)->find($id)->delete();
+		\App\User::where('id_koperasi',Auth::user()->id_koperasi)->find($id)->delete();
 		\App\Privileges::where('assigned_koperasi',Auth::user()->assigned_koperasi)->where('id_users',$id)->delete();
 		return redirect(url('pengaturan/pengurus'));
 	}

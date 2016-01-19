@@ -96,7 +96,7 @@ class TransaksiSimpanan extends Controller {
 			$finan->id_koperasi = Auth::user()->assigned_koperasi;
 			$finan->id_anggota = Input::get('id_anggota');
 			$finan->tabel = 'transaksis';
-			$finan->jenis = 'simpanan';
+			$finan->jenis = 'tabungan';
 			$finan->info = "Pembayaran ".(\App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_jenis'))['nama'])." ".(\App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find(Input::get('id_anggota'))['nama'])." Rp. ".(number_format(Input::get('jumlah'),2,",","."))." (".date("d/m/Y H:i:s").") ".Auth::user()->name;
 			$finan->id_transaksi = $new->id;
 			$finan->masuk = Input::get('jumlah');
