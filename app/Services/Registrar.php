@@ -283,6 +283,12 @@ class Registrar implements RegistrarContract {
 			$menu->url = "preferensi/catatan";
 			$menu->icon = "fa-pencil";
 			$menu->save();
+			$menu = new \App\Menu;
+			$menu->id_induk = $id_last;
+			$menu->nama = "Badan Hukum";
+			$menu->url = "preferensi/badan_hukum";
+			$menu->icon = "fa-institution";
+			$menu->save();
 		$menu = new \App\Menu;
 		$menu->id_induk = 0;
 		$menu->nama = "Pengaturan";
