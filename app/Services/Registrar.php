@@ -206,7 +206,7 @@ class Registrar implements RegistrarContract {
 				$menu->id_induk = $id_last2;
 				$menu->nama = "Tabungan";
 				$menu->url = "";
-				$menu->icon = "fa-credit";
+				$menu->icon = "fa-credit-card";
 				$menu->save();
 					$id_last3 = $menu->id;
 					$menu = new \App\Menu;
