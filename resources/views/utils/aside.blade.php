@@ -20,126 +20,85 @@
       </form-->
       <ul class="sidebar-menu">
         <li class="header">NAVIGATION</li>
-        <li class="treeview">
-          <a href="{{ url() }}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-user"></i> Anggota <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('anggota/baru')}}"><i class="fa fa-user-plus"></i> Tambah Anggota</a></li>
-            <li><a href="{{url('anggota')}}"><i class="fa fa-list"></i> Data Anggota</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-map-signs"></i>
-            <span>Transaksi</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a><i class="fa fa-folder-open"></i> Simpanan
-            <i class="fa fa-angle-left pull-right"></i></a>
+        <?php
+        $menu = \App\Menu::where('id_induk',0)
+                        ->get();
+        foreach ($menu as $key) {
+          if(sizeof(\App\Privileges::where('id_koperasi',Auth::user()->assigned_koperasi)
+                    ->where('id_users',Auth::user()->id)
+                    ->where('id_menu',$key->id)->get())>0){
+          $menus = \App\Menu::find($key->id);
+          $child = \App\Menu::where('id_induk',$key->id)
+                        ->get();
+          ?>
+          <li class="treeview">
+            <a href="{{url($menus->url)}}"><i class="fa {!!$menus->icon!!}"></i> {{$menus->nama}} {!!(sizeof($child)>0)?'<i class="fa fa-angle-left pull-right"></i>':""!!}</a>
+            <?php
+            if(sizeof($child)>0){
+              ?>
               <ul class="treeview-menu">
-                <li><a href="{{url('transaksi/simpanan/baru')}}"><i class="fa fa-plus"></i> Tambah Simpanan</a></li>
-                <li><a href="{{url('transaksi/simpanan')}}"><i class="fa fa-list"></i> Data Simpanan</a></li>
+              <?php
+              foreach ($child as $keychild) {
+                if(sizeof(\App\Privileges::where('id_koperasi',Auth::user()->assigned_koperasi)
+                                    ->where('id_users',Auth::user()->id)
+                                    ->where('id_menu',$keychild->id)->get())>0){
+                          $menus = \App\Menu::find($keychild->id);
+                          $child = \App\Menu::where('id_induk',$keychild->id)
+                                        ->get();
+                          ?>
+                          <li class="treeview">
+                            <a href="{{url($menus->url)}}"><i class="fa {!!$menus->icon!!}"></i> {{$menus->nama}} {!!(sizeof($child)>0)?'<i class="fa fa-angle-left pull-right"></i>':""!!}</a>
+                            <?php
+                            if(sizeof($child)>0){
+                              ?>
+                              <ul class="treeview-menu">
+                              <?php
+                              foreach ($child as $keychild) {
+                                  if(sizeof(\App\Privileges::where('id_koperasi',Auth::user()->assigned_koperasi)
+                                                      ->where('id_users',Auth::user()->id)
+                                                      ->where('id_menu',$keychild->id)->get())>0){
+                                            $menus = \App\Menu::find($keychild->id);
+                                            $child = \App\Menu::where('id_induk',$keychild->id)
+                                                          ->get();
+                                            ?>
+                                            <li class="treeview">
+                                              <a href="{{url($menus->url)}}"><i class="fa {!!$menus->icon!!}"></i> {{$menus->nama}} {!!(sizeof($child)>0)?'<i class="fa fa-angle-left pull-right"></i>':""!!}</a>
+                                              <?php
+                                              if(sizeof($child)>0){
+                                                ?>
+                                                <ul class="treeview-menu">
+                                                <?php
+                                                foreach ($child as $keychild) {
+                                                ?>
+
+                                                  <li><a href="{{url($keychild->url)}}"><i class="fa {{$keychild->icon}}"></i> {{$keychild->nama}}</a></li>
+                                                <?php 
+                                                }
+                                                ?>
+                                                </ul>
+                                                <?php
+                                              } ?>
+                                            </li>
+                                            <?php
+                                          }
+                              }
+                              ?>
+                              </ul>
+                              <?php
+                            } ?>
+                          </li>
+                          <?php
+                        }
+              }
+              ?>
               </ul>
-            </li>
-            <li><a><i class="fa fa-money"></i> Pinjaman
-            <i class="fa fa-angle-left pull-right"></i></a>
-              <ul class="treeview-menu">
-                <li><a href="{{url('transaksi/pinjaman/baru')}}"><i class="fa fa-plus"></i> Buat Pinjaman</a></li>
-                <li><a href="{{url('transaksi/pinjaman')}}"><i class="fa fa-list"></i> Data Pinjaman</a></li>
-              </ul>
-            </li>
-            <li><a><i class="fa fa-pencil-square-o"></i> Angsuran
-            <i class="fa fa-angle-left pull-right"></i></a>
-              <ul class="treeview-menu">
-                <li><a href="{{url('transaksi/pembayaran/baru')}}"><i class="fa fa-plus"></i> Pembayaran</a></li>
-                <li><a href="{{url('transaksi/pembayaran/all')}}"><i class="fa fa-list"></i> Data Pembayaran</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-money"></i>
-            <span>Keuangan</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a><i class="fa fa-pencil"></i> Koreksi
-            <i class="fa fa-angle-left pull-right"></i></a>
-              <ul class="treeview-menu">
-                <li><a><i class="fa fa-institution"></i> Koperasi
-                <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="{{url('keuangan/pemasukan/koreksi')}}"><i class="fa fa-sign-in"></i> Pemasukan Koperasi</a></li>
-                    <li><a href="{{url('keuangan/pengeluaran/koreksi')}}"><i class="fa fa-sign-out"></i> Pengeluaran Koperasi</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-user"></i> Anggota
-                <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="{{url('keuangan/pemasukan/anggota')}}"><i class="fa fa-sign-in"></i> Pemasukan Anggota</a></li>
-                    <li><a href="{{url('keuangan/pengeluaran/anggota')}}"><i class="fa fa-sign-out"></i> Pengeluaran Anggota</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-credit-card"></i> Tabungan
-                <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="{{url('keuangan/pemasukan/tabungan')}}"><i class="fa fa-sign-in"></i> Pemasukan Tabungan</a></li>
-                    <li><a href="{{url('keuangan/pengeluaran/tabungan')}}"><i class="fa fa-sign-out"></i> Pengeluaran Tabungan</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="{{url('keuangan/rekap')}}"><i class="fa fa-server"></i> Rekap Keuangan</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-copy"></i>
-            <span>Laporan</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('laporan/simpanan')}}"><i class="fa fa-folder-open"></i> Simpanan</a></li>
-            <li><a href="{{url('laporan/pinjaman')}}"><i class="fa fa-money"></i> Pinjaman</a></li>
-            <li><a href="{{url('laporan/saldo')}}"><i class="fa fa-tachometer"></i> Saldo Koperasi</a></li>
-          </ul>
-        </li>
-        @if(Auth::user()->primary==1)
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cubes"></i>
-            <span>Preferensi</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('preferensi/simpanan')}}"><i class="fa fa-folder-open"></i> Simpanan</a></li>
-            <li><a href="{{url('preferensi/pinjaman')}}"><i class="fa fa-money"></i> Pinjaman</a></li>
-            <li><a href="{{url('preferensi/denda')}}"><i class="fa fa-calendar-times-o"></i> Denda</a></li>
-            <li><a href="{{url('preferensi/catatan')}}"><i class="fa fa-pencil"></i> Catatan Transaksi</a></li>
-            <li><a href="{{url('preferensi/badan_hukum')}}"><i class="fa fa-institution"></i> Badan Hukum</a></li>
-          </ul>
-        </li>
-        @endif
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cogs"></i>
-            <span>Pengaturan</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            @if(Auth::user()->primary==1)
-            <li><a href="{{url('pengaturan/koperasi')}}"><i class="fa fa-institution"></i> Koperasi</a></li>
-            <li><a href="{{url('pengaturan/pengurus')}}"><i class="fa fa-group"></i> Pengurus</a></li>
-            @endif
-            <li><a href="{{url('bantuan')}}"><i class="fa fa-life-ring"></i> Bantuan</a></li>
-          </ul>
-        </li>
+              <?php
+            } ?>
+          </li>
+          <?php
+        }
+      }
+        ?>
       </ul>
     </section>
   </aside>

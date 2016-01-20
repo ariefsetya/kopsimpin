@@ -68,7 +68,8 @@
                   <label class="col-sm-2 control-label">Jumlah Uang Masuk</label>
 
                   <div class="col-sm-10">
-                    <input type="text" value="0" id="jumlah" required class="form-control" name="jumlah" placeholder="Jumlah">
+                    <div id="jumlah_div" class="form-control for_numberinput"></div>
+                    <input type="hidden" value="0" id="jumlah" required class="form-control" name="jumlah" placeholder="Jumlah">
                   </div>
                 </div>
                 <div class="form-group">
@@ -98,7 +99,10 @@
 
 @endsection
 
-@section('footer')
+@section('footer')  
+
+  @include('utils.number_input')
+
   <script>
     $(function() {
       $("#nama").autocomplete({
@@ -121,6 +125,8 @@
 
 
 
-    });
+    });    
+    $('#jumlah_div').on('valueChanged', function (event) {$('#jumlah').val(event.args.value);}); 
+
   </script>
 @endsection

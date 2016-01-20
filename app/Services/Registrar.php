@@ -30,14 +30,14 @@ class Registrar implements RegistrarContract {
 	public function create(array $data)
 	{
 		$kop = new \App\Koperasi;
-		$kop->nama = "BaseCamp Software";
+		$kop->nama = "Koperasi Online";
 		$kop->alamat = "Jalan Condet Raya No. 9A";
 		$kop->email = "emailanenih@gmail.com";
 		$kop->no_telp = "083870002220";
 		$kop->no_fax = "083870002220";
 		$kop->denda = "0.05";
 		$kop->logo = ("Logo-Koperasi.gif");
-		$kop->catatan = ("Simpan baik baik dan setiap kali berhubungan dengan BaseCamp Software");
+		$kop->catatan = ("Simpan baik baik dan setiap kali berhubungan dengan Koperasi Online");
 		$kop->rtrw = "04/04";
 		$kop->kel = "Balekambang";
 		$kop->kec = "Kramat Jati";
@@ -405,7 +405,7 @@ class Registrar implements RegistrarContract {
 		$pin->save();
 		$ang = new \App\Anggota;
 		$ang->id_koperasi = $kop->id;
-		$ang->no_anggota = "A00001/2015";
+		$ang->no_anggota = "KSP-00001-A";
 		$ang->nama = "Arief Setya";
 		$ang->email = "ariefsetya@live.com";
 		$ang->no_telp = "083870002220";

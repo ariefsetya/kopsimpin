@@ -6,7 +6,8 @@
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
-          <img class="print_img" src="{{url('images/'.$koperasi->logo)}}"> {{$koperasi->nama}} 
+          <img class="print_img" src="{{url('images/'.$koperasi->logo)}}"> {{$koperasi->nama}}<br>
+          <span style="font-size:11pt;">Badan Hukum : {{\App\Koperasi::find(Auth::user()->assigned_koperasi)['badan_hukum']}}</span>
           <small class="pull-right">{{date_format(date_create($transaksi->updated_at),"d")." ".(\App\Bulan::where('bulan',date_format(date_create($transaksi->updated_at),"m"))->first()['nama'])." ".date_format(date_create($transaksi->updated_at),"Y H:i:s") }}</small>
         </h2>
       </div>
