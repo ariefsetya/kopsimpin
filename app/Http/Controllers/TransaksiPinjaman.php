@@ -175,7 +175,7 @@ class TransaksiPinjaman extends Controller {
 			$baru->total_peminjaman = 0;
 			$baru->info_ke = $i;
 			$baru->angsuran = 0;
-			$baru->created_at = date("Y-m-d H:i:s",strtotime("+".$i." month"));
+			$baru->created_at = date("Y-m-".date_format(date_create(Input::get('tanggal_jatuh_tempo')),'d')." H:i:s",strtotime("+".$i." month"));
 			$baru->save();
 		}
 

@@ -224,7 +224,7 @@ class Registrar implements RegistrarContract {
 			$menu = new \App\Menu;
 			$menu->id_induk = $id_last;
 			$menu->nama = "Rekap Keuangan";
-			$menu->url = "rekap/keuangan";
+			$menu->url = "keuangan/rekap";
 			$menu->icon = "fa-server";
 			$menu->save();
 		$menu = new \App\Menu;

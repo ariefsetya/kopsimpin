@@ -82,7 +82,17 @@
                     <input autocomplete="off" type="text" value="0" onchange="cek_biaya()" id="jangka_waktu" required class="form-control" name="jangka_waktu" placeholder="12">
                   </div>
                   <label class="col-sm-1 control-label pull-left">bulan</label>
-                  <label class="col-sm-2 control-label"></label>
+                  <label class="col-sm-2 control-label"></label>               
+
+                  <label class="col-sm-2 control-label">Tanggal Jatuh tempo</label>
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input id="tanggal_jatuh_tempo" name="tanggal_jatuh_tempo" type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="{{date("m/d/Y")}}">
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Bunga per bulan (%)</label>
@@ -210,9 +220,14 @@
 
 @section('footer')
   @include('utils.number_input')
+  <script src="{{url('plugins/input-mask/jquery.inputmask.js')}}"></script>
+  <script src="{{url('plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+  <script src="{{url('plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
   <script type="text/javascript">
+
     $('#jumlah_div').on('valueChanged', function (event) {$('#jumlah').val(event.args.value);cek_biaya()}); 
     $(function() {
+      $("#tanggal_jatuh_tempo").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
       $("#id_jenis").on('change',function () {
         if($("#id_jenis option:selected").val()!=""){
           $.ajax({
@@ -258,7 +273,7 @@
       var persen_tabungan = $("#persen_tabungan").val();
       var persen_biaya_admin = $("#persen_biaya_admin").val();
       var persen_biaya_asuransi = $("#persen_biaya_asuransi").val();
-      var persen_biaya_materai = $("#persen_biaya_materai").val();
+      var biaya_materai = $("#biaya_materai").val();
       var temp_bunga = $("#temp_bunga").val();
 
       if(jumlah!="" && jangka_waktu!="" && persen_bunga !="" && persen_tabungan!="" && 
@@ -277,6 +292,8 @@
               biaya_admin = parseFloat(biaya_admin)/100;
           $("#biaya_admin").val(biaya_admin.toFixed(2));
           $("#biaya_admin_div").jqxNumberInput('setDecimal',biaya_admin.toFixed(2));
+          $("#biaya_materai").val(biaya_materai.toFixed(2));
+          $("#biaya_materai_div").jqxNumberInput('setDecimal',biaya_materai.toFixed(2));
           var biaya_asuransi = parseFloat(jumlah)*parseFloat(persen_biaya_asuransi);
               biaya_asuransi = parseFloat(biaya_asuransi)/100;
           $("#biaya_asuransi").val(biaya_asuransi.toFixed(2));
