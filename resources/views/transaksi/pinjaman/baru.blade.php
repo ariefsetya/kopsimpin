@@ -228,7 +228,10 @@
     $('#jumlah_div').on('valueChanged', function (event) {$('#jumlah').val(event.args.value);cek_biaya()}); 
     $('#biaya_materai_div').on('valueChanged', function (event) {$('#biaya_materai').val(event.args.value);cek_biaya()}); 
     $(function() {
-      $("#tanggal_jatuh_tempo").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      //$("#tanggal_jatuh_tempo").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      $('#tanggal_jatuh_tempo').datepicker({
+          format: 'mm/dd/yyyy'
+      });
       $("#id_jenis").on('change',function () {
         if($("#id_jenis option:selected").val()!=""){
           $.ajax({
