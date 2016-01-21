@@ -226,6 +226,7 @@
   <script type="text/javascript">
 
     $('#jumlah_div').on('valueChanged', function (event) {$('#jumlah').val(event.args.value);cek_biaya()}); 
+    $('#biaya_materai_div').on('valueChanged', function (event) {$('#biaya_materai').val(event.args.value);cek_biaya()}); 
     $(function() {
       $("#tanggal_jatuh_tempo").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
       $("#id_jenis").on('change',function () {
@@ -273,7 +274,6 @@
       var persen_tabungan = $("#persen_tabungan").val();
       var persen_biaya_admin = $("#persen_biaya_admin").val();
       var persen_biaya_asuransi = $("#persen_biaya_asuransi").val();
-      var biaya_materai = $("#biaya_materai").val();
       var temp_bunga = $("#temp_bunga").val();
 
       if(jumlah!="" && jangka_waktu!="" && persen_bunga !="" && persen_tabungan!="" && 
@@ -292,8 +292,6 @@
               biaya_admin = parseFloat(biaya_admin)/100;
           $("#biaya_admin").val(biaya_admin.toFixed(2));
           $("#biaya_admin_div").jqxNumberInput('setDecimal',biaya_admin.toFixed(2));
-          $("#biaya_materai").val(biaya_materai.toFixed(2));
-          $("#biaya_materai_div").jqxNumberInput('setDecimal',biaya_materai.toFixed(2));
           var biaya_asuransi = parseFloat(jumlah)*parseFloat(persen_biaya_asuransi);
               biaya_asuransi = parseFloat(biaya_asuransi)/100;
           $("#biaya_asuransi").val(biaya_asuransi.toFixed(2));
