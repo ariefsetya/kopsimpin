@@ -277,7 +277,7 @@
       var temp_bunga = $("#temp_bunga").val();
 
       if(jumlah!="" && jangka_waktu!="" && persen_bunga !="" && persen_tabungan!="" && 
-          persen_biaya_materai!="" && persen_biaya_asuransi!="" && persen_biaya_admin!=""){
+          biaya_materai!="" && persen_biaya_asuransi!="" && persen_biaya_admin!=""){
 
           var rp_bunga = parseFloat(jumlah)*parseFloat(persen_bunga);
               rp_bunga = parseFloat(rp_bunga)/100;
