@@ -76,8 +76,7 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <a tabindex="-1" href="{{url('transaksi/pembayaran/all')}}" class="btn btn-default">Batal</a>
-                <button type="submit" class="btn btn-info pull-right">Simpan</button>
+                <button type="submit" class="btn btn-info pull-right">Cetak</button>
               </div>
               <!-- /.box-footer -->
             </form>
