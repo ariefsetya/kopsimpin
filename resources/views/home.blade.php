@@ -67,6 +67,19 @@
             <a href="{{url('keuangan/rekap')}}" class="small-box-footer">Cek Rekap Keuangan <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        <div class="col-lg-9 col-xs-6">
+          <div class="small-box bg-orange">
+            <div class="inner">
+              <h3>Rp. {{number_format(\App\Transaksi::selectRaw('(sum(jumlah_total)) as saldo')->where('id_koperasi',Auth::user()->assigned_koperasi)->where('status','Belum Lunas')->where('jenis_transaksi','Pengembalian Pinjaman')->first()['saldo'],2,",",".")}}</h3>
+
+              <p>Saldo di Lapangan</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="{{url('keuangan/rekap')}}" class="small-box-footer">Cek Rekap Keuangan <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
       </div>
       <!-- /.row -->
       <!-- Main row -->

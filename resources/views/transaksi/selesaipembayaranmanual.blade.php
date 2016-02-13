@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Tanda Terima Angsuran</title>
-  <link href="{{url('favicon.png')}}" rel="shortcut icon">
-  <link href="{{url('favicon.png')}}" rel="favicon">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{{ url('bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url('plugins/fa/css/font-awesome.min.css') }}">
-  <link rel="stylesheet" href="{{ url('dist/css/AdminLTE.min.css') }}">
-  <link rel="stylesheet" href="{{ url('dist/css/skins/_all-skins.min.css') }}">
-</head>
-<body onload="window.print();">
-<div class="wrapper">
-  <!-- Main content -->
-  <section class="invoice">
-    <!-- title row -->
+@extends('app')
+
+@section('content')
+<div class="content-wrapper">
+  <section class="invoice" style="margin:0">
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
@@ -31,9 +17,8 @@
           <b>Tanda Terima Angsuran</b>
         </h4>
       </div>
-      <!-- /.col -->
     </div>
-    <!-- info row -->
+    <br>
     <div class="row invoice-info">
       <div class="col-sm-4 invoice-col">
         <b>No. Transaksi {{$transaksi->no_transaksi}}</b><br>
@@ -46,9 +31,6 @@
         <b>Jatuh Tempo :</b> {{date_format(date_create($transaksi->created_at),"d")." ".(\App\Bulan::where('bulan',date_format(date_create($transaksi->created_at),"m"))->first()['nama'])." ".date_format(date_create($transaksi->created_at),"Y") }}<br>
       </div>
     </div>
-    <!-- /.row -->
-
-    <!-- Table row -->
     <div class="row">
       <div class="col-xs-12 table-responsive">
         <table class="table table-striped">
@@ -77,52 +59,10 @@
           </tbody>
         </table>
       </div>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
-    <div class="row">
 
-        <table class="text-center" style="width:100%">
-        <thead>
-          <tr>
-            <th>Penyetor</th>
-            <th>{{$koperasi->kabkota}}, {{date_format(date_create($transaksi->created_at),"d")." ".(\App\Bulan::where('bulan',date_format(date_create($transaksi->created_at),"m"))->first()['nama'])." ".date_format(date_create($transaksi->created_at),"Y") }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>{{$anggota->nama}}</td>
-            <td>{{$koperasi->nama}}</td>
-          </tr>
-          </tbody>
-        </table>
-    </div>
-    <div class="row">
-      <!-- accepted payments column -->
-      <div class="col-xs-12">
-        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-        Catatan : {{(\App\Koperasi::find(Auth::user()->assigned_koperasi)['catatan'])}} 
-        </p>
-      </div>
-      <!-- /.col -->
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
+    <a href="{{url('transaksi/pembayaran/cetak_manual/')}}" class="btn btn-warning">Cetak Manual Baru</a>
+    <a target="_blank" href="{{$url_next}}" class="btn btn-primary">Print Bukti</a>
   </section>
-  <!-- /.content -->
 </div>
-<!-- ./wrapper -->
-</body>
-</html>
+@endsection

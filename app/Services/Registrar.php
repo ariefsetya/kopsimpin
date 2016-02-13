@@ -248,6 +248,12 @@ class Registrar implements RegistrarContract {
 			$menu->save();
 			$menu = new \App\Menu;
 			$menu->id_induk = $id_last;
+			$menu->nama = "Cetak Bukti";
+			$menu->url = "transaksi/pembayaran/cetak_manual";
+			$menu->icon = "fa-print";
+			$menu->save();
+			$menu = new \App\Menu;
+			$menu->id_induk = $id_last;
 			$menu->nama = "Saldo Koperasi";
 			$menu->url = "laporan/saldo";
 			$menu->icon = "fa-tachometer";

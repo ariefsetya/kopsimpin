@@ -24,6 +24,16 @@ class AjaxController extends Controller {
 		$data = \App\Simpanan::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
 		echo $data->jumlah;
 	}
+	public function get_keuangan($id)
+	{
+		$data = \App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_anggota',$id)->whereRaw('masuk > 0')->where('info','like','Pembayaran%')->get();
+		$kirim = array();
+		foreach ($data as $key) {
+			$tanggal = date_format(date_create($key->created_at),"Y-m-d H:i:s");
+			$kirim[] = array($key->id,$tanggal,$key->no_nota,$key->info,$key->masuk);
+		}
+		echo json_encode(array('data'=>$kirim));
+	}
 	public function get_pinjaman($id)
 	{
 		$data = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->find($id);
@@ -34,6 +44,12 @@ class AjaxController extends Controller {
 		$data = \App\Transaksi::where('jenis_transaksi','Pinjaman')
 					->where('id_anggota',$id_anggota)
 					->where('status','Belum Lunas')->get();
+		echo json_encode($data);
+	}
+	public function get_pinjaman_all($id_anggota)
+	{
+		$data = \App\Transaksi::where('jenis_transaksi','Pinjaman')
+					->where('id_anggota',$id_anggota)->get();
 		echo json_encode($data);
 	}
 	public function get_angsuran_belum_lunas($id_induk)

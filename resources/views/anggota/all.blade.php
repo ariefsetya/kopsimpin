@@ -45,7 +45,7 @@
                     @endforeach
                   </tbody>
                 </table>
-                {{$data->render()}}
+                {!!$data->render()!!}
               </div>
             </div>
           </div>

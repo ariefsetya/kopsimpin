@@ -62,6 +62,10 @@ Route::post('transaksi/pembayaran/baru', 'TransaksiPinjaman@simpanpembayaran');
 Route::get('transaksi/pembayaran/print/{no_trx}', 'TransaksiPinjaman@printbukti');
 Route::get('transaksi/pembayaran/selesai/{no_trx}', 'TransaksiPinjaman@selesaipembayaran');
 Route::get('transaksi/pembayaran/all', 'TransaksiPinjaman@datapembayaran');
+Route::get('transaksi/pembayaran/cetak_manual/', 'TransaksiPinjaman@cetakbuktimanual');
+Route::post('transaksi/pembayaran/cetak_manual/', 'TransaksiPinjaman@cetakbuktimanualpost');
+Route::get('transaksi/pembayaran/cetak_manual/{id_trx}/{id_trx2}/{id_trx3}/{id_trx4}', 'TransaksiPinjaman@printbuktimanual');
+Route::get('transaksi/pembayaran/cetak_manual/live/{id_trx}/{id_trx2}/{id_trx3}/{id_trx4}', 'TransaksiPinjaman@livebuktimanual');
 
 Route::get('pengaturan/koperasi', 'PengaturanController@koperasi');
 Route::post('pengaturan/koperasi', 'PengaturanController@save_koperasi');
@@ -110,10 +114,12 @@ Route::get('laporan/saldo','LaporanController@saldo');
 Route::get('ajax/get_anggota/{nama}', 'AjaxController@get_anggota');
 Route::get('ajax/get_simpanan/{id_jenis}', 'AjaxController@get_simpanan');
 Route::get('ajax/get_pinjaman/{id_jenis}', 'AjaxController@get_pinjaman');
+Route::get('ajax/get_pinjaman/all/{id_anggota}', 'AjaxController@get_pinjaman_all');
 Route::get('ajax/get_pinjaman/belum_lunas/{id_anggota}', 'AjaxController@get_pinjaman_belum_lunas');
 Route::get('ajax/get_angsuran/belum_lunas/{id_anggota}', 'AjaxController@get_angsuran_belum_lunas');
 Route::get('ajax/get_angsuran/all/{id_anggota}', 'AjaxController@get_angsuran_all');
 Route::get('ajax/get_angsuran/data/{id_transaksi}', 'AjaxController@get_angsuran_data');
+Route::get('ajax/get_keuangan/{id_anggota}', 'AjaxController@get_keuangan');
 Route::get('ajax/get_menu', 'AjaxController@get_menu');
 
 Route::get('/images/{filename}', function ($filename)

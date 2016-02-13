@@ -21,29 +21,12 @@
     <br>
     <div class="row invoice-info">
       <div class="col-sm-4 invoice-col">
-        Dari
-        <address>
-          <strong>{{$anggota->nama}}</strong><br>
-          {{$anggota->alamat}}<br>
-          {{$anggota->kabkota}}<br>
-          Telp : {{$anggota->no_hp}}<br>
-          Perusahaan : {{$anggota->email}}
-        </address>
-      </div>
-      <div class="col-sm-4 invoice-col">
-        Ke
-        <address>
-          <strong>{{$koperasi->nama}}</strong><br>
-          {{$koperasi->alamat}}<br>
-          {{$koperasi->kabkota}}<br>
-          Telp : {{$koperasi->no_telp}}<br>
-          Email : {{$koperasi->email}}
-        </address>
-      </div>
-      <div class="col-sm-4 invoice-col">
         <b>No. Transaksi {{$transaksi->no_transaksi}}</b><br>
-        <br>
         <b>No. Rekening :</b> {{$anggota->no_anggota}}<br>
+      </div>
+      <div class="col-sm-4 invoice-col">
+      </div>
+      <div class="col-sm-4 invoice-col">
         <b>Jangka Waktu :</b> {{$induk->info_ke}} bulan<br>
         <b>Jatuh Tempo :</b> {{date_format(date_create($transaksi->created_at),"d")." ".(\App\Bulan::where('bulan',date_format(date_create($transaksi->created_at),"m"))->first()['nama'])." ".date_format(date_create($transaksi->created_at),"Y") }}<br>
       </div>
@@ -71,7 +54,7 @@
             <td></td>
             <td><b>Total</b></td>
             <td>Rp.</td>
-            <td class="text-right">{{number_format($transaksi->jumlah_total+$transaksi->total_denda,2,",",".")}}</td>
+            <td class="text-right">{{number_format($total,2,",",".")}}</td>
           </tr>
           </tbody>
         </table>

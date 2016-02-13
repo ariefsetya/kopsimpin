@@ -323,6 +323,11 @@ class TransaksiPinjaman extends Controller {
 		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
 		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$data['transaksi']->id_induk)->first();
 		$data['keuangan'] = \App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_transaksi',$data['transaksi']->id)->get();
+		$jumlah = 0;
+		foreach ($data['keuangan'] as $key) {
+			$jumlah += $key->masuk;
+		}
+		$data['total'] = $jumlah;
 		return view('transaksi.printpembayaran')->with($data);
 	}	
 	public function selesaipembayaran($id_trx)
@@ -332,6 +337,52 @@ class TransaksiPinjaman extends Controller {
 		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
 		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$data['transaksi']->id_induk)->first();
 		$data['keuangan'] = \App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id_transaksi',$data['transaksi']->id)->get();
+		$jumlah = 0;
+		foreach ($data['keuangan'] as $key) {
+			$jumlah += $key->masuk;
+		}
+		$data['total'] = $jumlah;
 		return view('transaksi.selesaipembayaran')->with($data);
+	}
+	public function cetakbuktimanual()
+	{
+		return view('transaksi.manual.pilihtransaksi');
+	}
+	public function cetakbuktimanualpost(){
+		//print_r(Input::all());
+		$arrIDKeu = implode(",", Input::get('id'));
+		$id_anggota = Input::get('id_anggota');
+		$id_induk = Input::get('id_induk');
+		$id_angsuran = Input::get('id_angsuran');
+		return redirect(url('transaksi/pembayaran/cetak_manual/'.$id_induk."/".$id_angsuran."/".$id_anggota."/".$arrIDKeu));
+	}
+	public function printbuktimanual($id_induk,$id_transaksi,$id_anggota,$arrIDKeu)
+	{
+		$data['keuangan'] = \App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->whereIn('id',explode(",", $arrIDKeu))->get();
+		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
+		$jumlah = 0;
+		foreach ($data['keuangan'] as $key) {
+			$jumlah += $key->masuk;
+		}
+		$data['total'] = $jumlah;
+		$data['transaksi'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$id_transaksi)->first(); 
+		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
+		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$id_induk)->first();
+		$data['url_next'] = url('transaksi/pembayaran/cetak_manual/live/'.$id_induk."/".$id_transaksi."/".$id_anggota."/".$arrIDKeu);
+		return view('transaksi.selesaipembayaranmanual')->with($data);
+	}
+	public function livebuktimanual($id_induk,$id_transaksi,$id_anggota,$arrIDKeu)
+	{
+		$data['keuangan'] = \App\Keuangan::where('id_koperasi',Auth::user()->assigned_koperasi)->whereIn('id',explode(",", $arrIDKeu))->get();
+		$data['koperasi'] = \App\Koperasi::find(Auth::user()->assigned_koperasi);
+		$jumlah = 0;
+		foreach ($data['keuangan'] as $key) {
+			$jumlah += $key->masuk;
+		}
+		$data['total'] = $jumlah;
+		$data['transaksi'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$id_transaksi)->first(); 
+		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
+		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$id_induk)->first();
+		return view('transaksi.printpembayaran')->with($data);
 	}
 }
