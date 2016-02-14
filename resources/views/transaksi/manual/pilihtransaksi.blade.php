@@ -12,8 +12,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Pembayaran Angsuran
-        <small>Baru</small>
+        Cetak Bukti Pembayaran
+        <small>Manual</small>
       </h1>
     </section>
     <!-- Main content -->
