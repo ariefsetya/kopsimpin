@@ -55,7 +55,7 @@
           </div>
         </div>
         <?php
-        $data_pinjaman = \App\Pinjaman::all();
+        $data_pinjaman = \App\Pinjaman::where('id_koperasi',Auth::user()->assigned_koperasi)->get();
         ?>
         @foreach($data_pinjaman as $key)
         <div class="col-lg-6 col-xs-6">
