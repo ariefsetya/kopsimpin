@@ -68,7 +68,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="{{url('keuangan/rekap')}}" class="small-box-footer">Cek Rekap Keuangan <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{url('transaksi/pembayaran/all')}}" class="small-box-footer">Cek Data Pembayaran <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         @endforeach
