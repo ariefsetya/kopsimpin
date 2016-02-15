@@ -35,11 +35,9 @@
     </div>
     <!-- info row -->
     <div class="row invoice-info">
-      <div class="col-sm-4 invoice-col">
+      <div class="col-sm-8 invoice-col">
         <b>No. Transaksi {{$transaksi->no_transaksi}}</b><br>
         <b>No. Rekening :</b> {{$anggota->no_anggota}}<br>
-      </div>
-      <div class="col-sm-4 invoice-col">
       </div>
       <div class="col-sm-4 invoice-col">
         <b>Jangka Waktu :</b> {{$induk->info_ke}} bulan<br>
@@ -61,9 +59,13 @@
           </thead>
           <tbody>
           @foreach($keuangan as $key)
+          <?php 
+          $info = explode(") ", $key->info);
+          $info = $info[0].")";
+          ?>
           <tr>
             <td>{{$key->no_nota}}</td>
-            <td>{{$key->info}}</td>
+            <td>{{$info}}</td>
             <td>Rp.</td>
             <td class="text-right">{{number_format($key->masuk,2,",",".")}}</td>
           </tr>
