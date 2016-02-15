@@ -18,7 +18,6 @@
         </h4>
       </div>
     </div>
-    <br>
     <div class="row invoice-info">
       <div class="col-sm-4 invoice-col">
         <b>No. Transaksi {{$transaksi->no_transaksi}}</b><br>
