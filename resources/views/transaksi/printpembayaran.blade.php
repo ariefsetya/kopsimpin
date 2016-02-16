@@ -26,10 +26,8 @@
         </h2>
       </div>
 
-      <div class="">
-        <h4 class="text-center">
+      <div class="text-center">
           <b>Tanda Terima Angsuran</b>
-        </h4>
       </div>
       <!-- /.col -->
     </div>
@@ -43,6 +41,7 @@
       </div>
       <div class="col-sm-4 invoice-col">
         <b>Jangka Waktu :</b> {{$induk->info_ke}} bulan<br>
+        <b>Sisa Angsuran :</b> {{sizeof(\App\Transaksi::where('id_induk',$transaksi->id_induk)->where('status','Belum Lunas')->get())}} bulan<br>
         <b>Jatuh Tempo :</b> {{date_format(date_create($transaksi->created_at),"d")." ".(\App\Bulan::where('bulan',date_format(date_create($transaksi->created_at),"m"))->first()['nama'])." ".date_format(date_create($transaksi->created_at),"Y") }}<br>
       </div>
     </div>
@@ -62,8 +61,8 @@
           <tbody>
           @foreach($keuangan as $key)
           <?php 
-          $info = explode(") ", $key->info);
-          $info = $info[0].")";
+          $info = explode(" (", $key->info);
+          $info = $info[0];
           ?>
           <tr>
             <td>{{$key->no_nota}}</td>
