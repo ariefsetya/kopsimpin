@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Tanda Terima Angsuran</title>
-  <link href="{{url('favicon.png')}}" rel="shortcut icon">
-  <link href="{{url('favicon.png')}}" rel="favicon">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{{ url('bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url('plugins/fa/css/font-awesome.min.css') }}">
-  <link rel="stylesheet" href="{{ url('dist/css/AdminLTE.min.css') }}">
-  <link rel="stylesheet" href="{{ url('dist/css/skins/_all-skins.min.css') }}">
 </head>
-<body onload="window.print();">
+<body>
 <div class="wrapper">
   <!-- Main content -->
   <section class="invoice">

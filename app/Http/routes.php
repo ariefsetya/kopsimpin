@@ -136,3 +136,11 @@ Route::get('/images/{filename}', function ($filename)
 // {
 // 	echo bcrypt($pass);
 // });
+
+Route::get('pdf',function(){
+	$pdf = App::make('dompdf.wrapper');
+	$pdf->loadHTML('<h1>Test</h1>');
+	$pdf->setPaper(array(0,0,350,350));
+	$pdf->setMargin(array(0,0,0,0));
+	return $pdf->stream();
+});

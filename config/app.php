@@ -145,6 +145,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
+		Barryvdh\DomPDF\ServiceProvider::class,
 
 	],
 
@@ -194,6 +195,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Excel' 	=> 'Maatwebsite\Excel\Facades\Excel',
+		'PDF' 		=> Barryvdh\DomPDF\Facade::class,
 
 
 	],

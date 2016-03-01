@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;	
+use PDF;
 
 class TransaksiPinjaman extends Controller {
 
@@ -328,7 +329,12 @@ class TransaksiPinjaman extends Controller {
 			$jumlah += $key->masuk;
 		}
 		$data['total'] = $jumlah;
-		return view('transaksi.printpembayaran')->with($data);
+
+		$pdf = PDF::loadView('transaksi.printpembayaran', $data);
+//	$pdf loadView('transaksi.printpembayaran',$data);
+	$pdf->setPaper(array(0,0,612,312));
+	return $pdf->stream();
+		//return view('transaksi.printpembayaran')->with($data);
 	}	
 	public function selesaipembayaran($id_trx)
 	{
@@ -369,6 +375,8 @@ class TransaksiPinjaman extends Controller {
 		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
 		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$id_induk)->first();
 		$data['url_next'] = url('transaksi/pembayaran/cetak_manual/live/'.$id_induk."/".$id_transaksi."/".$id_anggota."/".$arrIDKeu);
+
+
 		return view('transaksi.selesaipembayaranmanual')->with($data);
 	}
 	public function livebuktimanual($id_induk,$id_transaksi,$id_anggota,$arrIDKeu)
@@ -383,6 +391,13 @@ class TransaksiPinjaman extends Controller {
 		$data['transaksi'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$id_transaksi)->first(); 
 		$data['anggota'] = \App\Anggota::where('id_koperasi',Auth::user()->assigned_koperasi)->find($data['transaksi']->id_anggota); 
 		$data['induk'] = \App\Transaksi::where('id_koperasi',Auth::user()->assigned_koperasi)->where('id',$id_induk)->first();
-		return view('transaksi.printpembayaran')->with($data);
+	
+	// $pdf = \App::make('dompdf.wrapper');
+	//$pdf->loadView('transaksi.printpembayaran',$data);
+	//$pdf->setPaper(array(0,0,612,312));
+	$pdf = PDF::loadView('transaksi.printpembayaran', $data);
+	return $pdf->stream('download.pdf');
+
+		//return view('transaksi.printpembayaran')->with($data);
 	}
 }
