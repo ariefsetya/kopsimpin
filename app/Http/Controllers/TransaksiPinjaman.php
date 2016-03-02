@@ -394,8 +394,8 @@ class TransaksiPinjaman extends Controller {
 	
 	// $pdf = \App::make('dompdf.wrapper');
 	//$pdf->loadView('transaksi.printpembayaran',$data);
-	//$pdf->setPaper(array(0,0,612,312));
 	$pdf = PDF::loadView('transaksi.printpembayaran', $data);
+	$pdf->setPaper(array(0,0,612,379));
 	return $pdf->stream('download.pdf');
 
 		//return view('transaksi.printpembayaran')->with($data);
